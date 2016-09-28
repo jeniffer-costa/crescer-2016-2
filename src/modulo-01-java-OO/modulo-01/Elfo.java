@@ -1,36 +1,46 @@
-public class Elfo {
+public class Elfo{
     private String nome;
     private Item arco;
-    private Item flecha;
+    private Item flechas;
+    private Anao dwarf;
     private int experiencia;
 
-    public Elfo(String n) {
+    public Elfo(String n){
         nome = n;
         arco = new Item("Arco", 1);
-        flecha = new Item("Flechas", 42);
+        flechas = new Item("Flechas",42);
+        dwarf = new Anao("Dwarf");
     }
 
-    public void setNome(String n) {
+    public void setNome(String n){
         nome = n;
     }
 
-    public String getNome() {
+    public String getNome(){
         return nome;
     }
-    
-    public Item getArco() {
+    public Item getArco(){
         return arco;
     }
-
-    public void atirarFlecha() {
-        flecha.setQuantidade(flecha.getQuantidade() - 1);
-        experiencia++;
+    public Item getFlechas(){
+        return flechas;
+    }
+        public Anao getDwarf(){
+        return dwarf;
     }
 
-    /*public void atirarFlechaRefactory() {
+    public void atirarFlecha(){
+        if (flechas.getQuantidade()>= 1){
+        flechas.setQuantidade(flechas.getQuantidade()-1);
         experiencia++;
-        flecha.setQuantidade(flecha.getQuantidade()-1);
-    }*/
+        dwarf.setQuantVida(dwarf.getQuantVida()-10);
+       }
+    }
+    
+
+    public void atirarFlechaRefactory(){
+        experiencia++;
+        flechas.setQuantidade(flechas.getQuantidade()-1);
+    }
+
 }
-
-
