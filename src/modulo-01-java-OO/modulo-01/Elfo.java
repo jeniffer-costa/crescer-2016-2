@@ -1,16 +1,18 @@
-
 public class Elfo{
     private String nome;
     private Item arco;
     private Item flechas;
-    private Anao dwarf;
     private int experiencia;
 
     public Elfo(String n){
-        nome = n;
+        // chamando construtor de baixo
+        this(n,42);
+    }
+    
+    public Elfo(String n, int quantFlechas){
+        this.nome = n;
         arco = new Item("Arco", 1);
-        flechas = new Item("Flechas",42);
-        dwarf = new Anao("Dwarf");
+        flechas = new Item("Flechas",quantFlechas >= 0 ? quantFlechas : 42);
     }
 
     public void setNome(String n){
@@ -26,15 +28,27 @@ public class Elfo{
     public Item getFlechas(){
         return flechas;
     }
-        public Anao getDwarf(){
-        return dwarf;
+    public int getExperiencia(){
+        return experiencia;
+    }
+    public String toString(){
+       boolean flechaNoSingular = this.flechas.getQuantidade() == 1;
+       boolean experienciaNoSingular = this.experiencia == 0 || this.experiencia == 1;
+       return String.format ("%s possui %d %s e %s %s de experiência.",
+       this.nome,
+       this.flechas.getQuantidade(),
+       flechaNoSingular ? "flecha" : "flechas",
+       this.experiencia,
+       experienciaNoSingular ? "nível" : "níveis");
+       
     }
 
-    public void atirarFlecha(){
-        if (flechas.getQuantidade()>= 1){
+    public void atirarFlecha(Dwarf dwarf){
+        boolean temFlecha = flechas.getQuantidade() > 0;
+        if (temFlecha){
         flechas.setQuantidade(flechas.getQuantidade()-1);
         experiencia++;
-        dwarf.setQuantVida(dwarf.getQuantVida()-10);
+        dwarf.perdeVida();
        }
     }
     
