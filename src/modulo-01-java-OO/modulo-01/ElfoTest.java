@@ -1,3 +1,4 @@
+
 import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
@@ -39,79 +40,112 @@ public class ElfoTest
        // Arrange
        Elfo novoElfo = new Elfo("Legolas");
        // Act
-       novoElfo.atirarFlecha();
+       novoElfo.atirarFlecha(new Dwarf("Teste",2,5,2016));
        // Assert
        assertEquals(41,novoElfo.getFlechas().getQuantidade());
+       assertEquals(1, novoElfo.getExperiencia());
     }
     @Test
     public void atirarDezFlechas(){
        // Arrange
        Elfo novoElfo = new Elfo("Jeniffer");
        // Act
-       novoElfo.atirarFlecha();
-       novoElfo.atirarFlecha();
-       novoElfo.atirarFlecha();
-       novoElfo.atirarFlecha();
-       novoElfo.atirarFlecha();
-       novoElfo.atirarFlecha();
-       novoElfo.atirarFlecha();
-       novoElfo.atirarFlecha();
-       novoElfo.atirarFlecha();
-       novoElfo.atirarFlecha();
+       novoElfo.atirarFlecha(new Dwarf("Teste",2,5,2016));
+       novoElfo.atirarFlecha(new Dwarf("Teste",2,5,2016));
+       novoElfo.atirarFlecha(new Dwarf("Teste",2,5,2016));
+       novoElfo.atirarFlecha(new Dwarf("Teste",2,5,2016));
+       novoElfo.atirarFlecha(new Dwarf("Teste",2,5,2016));
+       novoElfo.atirarFlecha(new Dwarf("Teste",2,5,2016));
+       novoElfo.atirarFlecha(new Dwarf("Teste",2,5,2016));
+       novoElfo.atirarFlecha(new Dwarf("Teste",2,5,2016));
+       novoElfo.atirarFlecha(new Dwarf("Teste",2,5,2016));
+       novoElfo.atirarFlecha(new Dwarf("Teste",2,5,2016));
        // Assert
        assertEquals(32,novoElfo.getFlechas().getQuantidade());
+       assertEquals(10, novoElfo.getExperiencia());
+    }
+    @Test
+    public void atirar42Flechas(){
+       // Arrange
+       Elfo novoElfo = new Elfo("Batman");
+       // Act
+       for (int i=0;i<=42;i++)
+       novoElfo.atirarFlecha(new Dwarf("Teste",2,5,2016));
+       // Assert
+       assertEquals(0,novoElfo.getFlechas().getQuantidade());
+       assertEquals(42, novoElfo.getExperiencia());
     }
     @Test       
-    public void AnaoPerdeQuantVida(){
+    public void DwarfPerdeQuantVida(){
         // Arrange
-        Anao dwarf = new Anao("Dwarf");
+        Dwarf dwarf = new Dwarf("Teste",2,5,2016);
         Elfo novoElfo = new Elfo("Arnold");
         // Act
-        novoElfo.atirarFlecha();
+        novoElfo.atirarFlecha(dwarf);
         // Assert
-        assertEquals(100,novoElfo.getDwarf().getQuantVida());
+        assertEquals(100,dwarf.getQuantVida());
     }
     @Test       
     public void atirarDuasFlechasAnao(){
         // Arrange
-        Anao dwarf = new Anao("teste1");
+        Dwarf dwarf = new Dwarf("Teste",2,5,2016);
         Elfo novoElfo = new Elfo("Arnold");
         // Act
-        novoElfo.atirarFlecha();
-        novoElfo.atirarFlecha();
+        novoElfo.atirarFlecha(dwarf);
+        novoElfo.atirarFlecha(dwarf);
         // Assert
-        assertEquals(90,novoElfo.getDwarf().getQuantVida());
+        assertEquals(90,dwarf.getQuantVida());
     }
     @Test       
     public void atirarFlechaDoisAnoes(){
         // Arrange
-        Anao dwarf = new Anao("Dwarf");
-        Anao novoAnao = new Anao("kkkkk");
+        Dwarf dwarf = new Dwarf("Teste",2,5,2016);
+        Dwarf novoAnao = new Dwarf("Teste",2,5,2016);
         Elfo novoElfo = new Elfo("Arnold");
         Elfo novoElfo2 = new Elfo("bbbb");
         // Act
-        novoElfo.atirarFlecha();
-        novoElfo2.atirarFlecha();
+        novoElfo.atirarFlecha(dwarf);
+        novoElfo2.atirarFlecha(novoAnao);
         // Assert
-        assertEquals(100,novoElfo.getDwarf().getQuantVida());
-        assertEquals(100,novoElfo.getDwarf().getQuantVida());
+        assertEquals(100,dwarf.getQuantVida());
+        assertEquals(100,novoAnao.getQuantVida());
     }
     @Test       
     public void atirarQuantDiferentesFlechasAnoes(){
         // Arrange
-        Anao dwarf = new Anao("Batman");
-        Anao novoAnao = new Anao("Superman");
+        Dwarf dwarf = new Dwarf("Teste",2,5,2016);
+        Dwarf novoAnao = new Dwarf("Teste",2,5,2016);
         Elfo novoElfo = new Elfo("Elfo1");
         Elfo novoElfo2 = new Elfo("Elfo2");
         // Act
-        novoElfo.atirarFlecha();
-        novoElfo.atirarFlecha();
-        novoElfo.atirarFlecha();
-        novoElfo2.atirarFlecha();
+        novoElfo.atirarFlecha(dwarf);
+        novoElfo.atirarFlecha(dwarf);
+        novoElfo.atirarFlecha(dwarf);
+        novoElfo2.atirarFlecha(novoAnao);
         // Assert
-        assertEquals(80,novoElfo.getDwarf().getQuantVida());
-        assertEquals(100,novoElfo2.getDwarf().getQuantVida());
+        assertEquals(90,dwarf.getQuantVida());
+        assertEquals(100,novoAnao.getQuantVida());
     }
-    
-
+    @Test 
+    public void elfoToString(){
+       Elfo novoElfo = new Elfo("Jeniffer");
+       assertEquals("Jeniffer possui 42 flechas e 0 nível de experiência.",novoElfo.toString());
+    }
+    @Test 
+    public void elfoAtiraFlechaToString(){
+       Elfo novoElfo = new Elfo("Jeniffer");
+       novoElfo.atirarFlecha(new Dwarf("Teste",2,5,2016));
+       assertEquals("Jeniffer possui 41 flechas e 1 nível de experiência.",novoElfo.toString());
+    }
+    @Test
+    public void testaConstrutor(){
+       Elfo novoElfo = new Elfo("Batman",34);
+       assertEquals(34,novoElfo.getFlechas().getQuantidade());
+       assertEquals("Batman",novoElfo.getNome());
+    }
+    @Test
+     public void criarElfoComFlechasNegativas(){
+       Elfo novoElfo = new Elfo("Batman",-34);
+       assertEquals(42,novoElfo.getFlechas().getQuantidade());
+    }
 }
