@@ -3,6 +3,7 @@ public class Elfo{
     private Item arco;
     private Item flechas;
     private int experiencia;
+    private Status status;
 
     public Elfo(String n){
         // chamando construtor de baixo
@@ -13,6 +14,7 @@ public class Elfo{
         this.nome = n;
         arco = new Item("Arco", 1);
         flechas = new Item("Flechas",quantFlechas >= 0 ? quantFlechas : 42);
+        status = Status.VIVO;
     }
 
     public void setNome(String n){
@@ -30,6 +32,9 @@ public class Elfo{
     }
     public int getExperiencia(){
         return experiencia;
+    }
+        public Status getStatus(){
+        return status;
     }
     public String toString(){
        boolean flechaNoSingular = this.flechas.getQuantidade() == 1;
