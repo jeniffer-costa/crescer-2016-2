@@ -13,4 +13,7 @@ public class Inventario
     public ArrayList<Item> getItens(){
         return itens;
     }
+    public Item getItem(int index){
+       return itens.get(index);
+    }
 }
