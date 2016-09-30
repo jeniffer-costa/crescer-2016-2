@@ -40,7 +40,7 @@ public class ElfoTest
        // Arrange
        Elfo novoElfo = new Elfo("Legolas");
        // Act
-       novoElfo.atirarFlecha(new Dwarf("Teste",2,5,2016));
+       novoElfo.atirarFlecha(new Dwarf());
        // Assert
        assertEquals(41,novoElfo.getFlechas().getQuantidade());
        assertEquals(1, novoElfo.getExperiencia());
@@ -50,16 +50,16 @@ public class ElfoTest
        // Arrange
        Elfo novoElfo = new Elfo("Jeniffer");
        // Act
-       novoElfo.atirarFlecha(new Dwarf("Teste",2,5,2016));
-       novoElfo.atirarFlecha(new Dwarf("Teste",2,5,2016));
-       novoElfo.atirarFlecha(new Dwarf("Teste",2,5,2016));
-       novoElfo.atirarFlecha(new Dwarf("Teste",2,5,2016));
-       novoElfo.atirarFlecha(new Dwarf("Teste",2,5,2016));
-       novoElfo.atirarFlecha(new Dwarf("Teste",2,5,2016));
-       novoElfo.atirarFlecha(new Dwarf("Teste",2,5,2016));
-       novoElfo.atirarFlecha(new Dwarf("Teste",2,5,2016));
-       novoElfo.atirarFlecha(new Dwarf("Teste",2,5,2016));
-       novoElfo.atirarFlecha(new Dwarf("Teste",2,5,2016));
+       novoElfo.atirarFlecha(new Dwarf());
+       novoElfo.atirarFlecha(new Dwarf());
+       novoElfo.atirarFlecha(new Dwarf());
+       novoElfo.atirarFlecha(new Dwarf());
+       novoElfo.atirarFlecha(new Dwarf());
+       novoElfo.atirarFlecha(new Dwarf());
+       novoElfo.atirarFlecha(new Dwarf());
+       novoElfo.atirarFlecha(new Dwarf());
+       novoElfo.atirarFlecha(new Dwarf());
+       novoElfo.atirarFlecha(new Dwarf());
        // Assert
        assertEquals(32,novoElfo.getFlechas().getQuantidade());
        assertEquals(10, novoElfo.getExperiencia());
@@ -70,7 +70,7 @@ public class ElfoTest
        Elfo novoElfo = new Elfo("Batman");
        // Act
        for (int i=0;i<=42;i++)
-       novoElfo.atirarFlecha(new Dwarf("Teste",2,5,2016));
+       novoElfo.atirarFlecha(new Dwarf());
        // Assert
        assertEquals(0,novoElfo.getFlechas().getQuantidade());
        assertEquals(42, novoElfo.getExperiencia());
@@ -78,7 +78,7 @@ public class ElfoTest
     @Test       
     public void DwarfPerdeQuantVida(){
         // Arrange
-        Dwarf dwarf = new Dwarf("Teste",2,5,2016);
+        Dwarf dwarf = new Dwarf();
         Elfo novoElfo = new Elfo("Arnold");
         // Act
         novoElfo.atirarFlecha(dwarf);
@@ -88,7 +88,7 @@ public class ElfoTest
     @Test       
     public void atirarDuasFlechasAnao(){
         // Arrange
-        Dwarf dwarf = new Dwarf("Teste",2,5,2016);
+        Dwarf dwarf = new Dwarf();
         Elfo novoElfo = new Elfo("Arnold");
         // Act
         novoElfo.atirarFlecha(dwarf);
@@ -99,8 +99,8 @@ public class ElfoTest
     @Test       
     public void atirarFlechaDoisAnoes(){
         // Arrange
-        Dwarf dwarf = new Dwarf("Teste",2,5,2016);
-        Dwarf novoAnao = new Dwarf("Teste",2,5,2016);
+        Dwarf dwarf = new Dwarf();
+        Dwarf novoAnao = new Dwarf();
         Elfo novoElfo = new Elfo("Arnold");
         Elfo novoElfo2 = new Elfo("bbbb");
         // Act
@@ -113,8 +113,8 @@ public class ElfoTest
     @Test       
     public void atirarQuantDiferentesFlechasAnoes(){
         // Arrange
-        Dwarf dwarf = new Dwarf("Teste",2,5,2016);
-        Dwarf novoAnao = new Dwarf("Teste",2,5,2016);
+        Dwarf dwarf = new Dwarf();
+        Dwarf novoAnao = new Dwarf();
         Elfo novoElfo = new Elfo("Elfo1");
         Elfo novoElfo2 = new Elfo("Elfo2");
         // Act
@@ -123,7 +123,7 @@ public class ElfoTest
         novoElfo.atirarFlecha(dwarf);
         novoElfo2.atirarFlecha(novoAnao);
         // Assert
-        assertEquals(90,dwarf.getQuantVida());
+        assertEquals(80,dwarf.getQuantVida());
         assertEquals(100,novoAnao.getQuantVida());
     }
     @Test 
@@ -134,7 +134,7 @@ public class ElfoTest
     @Test 
     public void elfoAtiraFlechaToString(){
        Elfo novoElfo = new Elfo("Jeniffer");
-       novoElfo.atirarFlecha(new Dwarf("Teste",2,5,2016));
+       novoElfo.atirarFlecha(new Dwarf());
        assertEquals("Jeniffer possui 41 flechas e 1 nível de experiência.",novoElfo.toString());
     }
     @Test
@@ -148,4 +148,10 @@ public class ElfoTest
        Elfo novoElfo = new Elfo("Batman",-34);
        assertEquals(42,novoElfo.getFlechas().getQuantidade());
     }
+    @Test
+    public void elfoNasceVivo(){
+      Elfo novoElfo = new Elfo("Batman");
+      assertEquals(Status.VIVO,novoElfo.getStatus());
+    }
+
 }
