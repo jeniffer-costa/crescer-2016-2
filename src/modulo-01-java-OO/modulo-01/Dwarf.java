@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class Dwarf
 {
@@ -5,43 +6,65 @@ public class Dwarf
     private DataTerceiraEra dataNascimento;
     private String nome;
     private int experiencia;
+    private Status status;
+    private Inventario inventario;
 
     public Dwarf()
     {
-        dataNascimento = new DataTerceiraEra(1,1,1);
+        // this.dataNascimento = new DataTerceiraEra(1,1,1);
+        // this.status = Status.VIVO;
+        this(null,new DataTerceiraEra(1,1,1));
     }
 
-    public Dwarf(String nome, int dia, int mes, int ano)
+    public Dwarf(String nome, DataTerceiraEra dataNascimento)
     {
         this.nome = nome;
-        dataNascimento = new DataTerceiraEra(dia,mes,ano);
+        this.dataNascimento = dataNascimento;
+        this.status = Status.VIVO;
     }
 
     public void perdeVida(){
-        if (getNumeroSorte() < 0){
-            experiencia++;
+        boolean estaMorto = status.equals(Status.MORTO);
+        if(!estaMorto){
+            double numeroSorte = getNumeroSorte();
+            if (numeroSorte < 0){
+                experiencia++;
+            }
+            if (numeroSorte > 100){
+                quantVida -= 10;
+                if (getQuantVida() < 0){
+                    quantVida = 0;
+                }
+            }
+            if (getQuantVida() == 0){
+                status = Status.MORTO;
+            }
         }
-        if (getNumeroSorte() > 100){
-            quantVida -= 10;
-        }
-
     }
+
     public int getQuantVida(){
         return quantVida;
     }
 
+    public Status getStatus(){
+        return status;
+    }
+
     public double getNumeroSorte(){
         double valorInicial = 101.0;
-
-        if ((this.dataNascimento.ehBissexto()) && (this.getQuantVida() >= 80 && this.getQuantVida() <= 90)){
+        boolean ehBissexto = dataNascimento.ehBissexto();
+        if (dataNascimento.ehBissexto() && this.getQuantVida() >= 80 && this.getQuantVida() <= 90){
             valorInicial *= -33;
         }
-        if ((this.dataNascimento.ehBissexto() == false) && (this.nome == "Seixas" || this.nome == "Meireles")){
+        if (!dataNascimento.ehBissexto() && ("Seixas".equals(this.nome) || "Meireles".equals(this.nome))){
             valorInicial = (valorInicial * 33) % 100;
         }
         return valorInicial;
-
-        //Se o campo dataNascimento do objeto Dwarf não for bissexto e o nome do Dwarf for "Seixas" ou "Meireles",
-        //multiplique o número a ser retornado por 33 e faça operador mod 100 com o resultado da multiplicação.
+    }
+    public void adicionarItem(Item item){
+        inventario.adicionarItem(item);
+    }
+    public void removerItem(Item item){
+        inventario.removerItem(item);
     }
 }
