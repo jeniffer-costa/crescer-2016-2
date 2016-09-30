@@ -23,6 +23,6 @@ public class DataTerceiraEra
         return ano;
     }
     public boolean ehBissexto(){
-     return (this.getAno() % 4 == 0 &&  this.getAno() % 100 != 0) || (this.getAno() % 400 == 0) ? true : false;
+     return (this.ano % 4 == 0 &&  this.ano % 100 != 0) || (this.ano % 400 == 0);
  }
 }
