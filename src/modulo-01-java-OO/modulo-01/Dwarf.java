@@ -61,10 +61,20 @@ public class Dwarf
         }
         return valorInicial;
     }
+
     public void adicionarItem(Item item){
         inventario.adicionarItem(item);
     }
+
     public void removerItem(Item item){
         inventario.removerItem(item);
+    }
+
+    public void tentarSorte(){
+        boolean temSorte = getNumeroSorte() == -3333;
+
+        if(temSorte){
+            inventario.aumentarUnidadesDosItens(1000);
+        }
     }
 }
