@@ -63,7 +63,7 @@ public class ElfoTest
        // Arrange
        Elfo novoElfo = new Elfo("Batman");
        // Act
-       for (int i=0;i<=42;i++)
+       for (int i=0;i<42;i++)
        novoElfo.atirarFlecha(new Dwarf());
        // Assert
        assertEquals(0,novoElfo.getInventario().getItem(1).getQuantidade());
@@ -107,17 +107,18 @@ public class ElfoTest
     @Test       
     public void atirarQuantDiferentesFlechasAnoes(){
         // Arrange
-        Dwarf dwarf = new Dwarf();
-        Dwarf novoAnao = new Dwarf();
-        Elfo novoElfo = new Elfo("Elfo1");
-        Elfo novoElfo2 = new Elfo("Elfo2");
+        DataTerceiraEra novaData = new DataTerceiraEra(12,12,2015);
+        Dwarf dwarf = new Dwarf("Pedro",novaData);
+        Dwarf novoAnao = new Dwarf("Batman",novaData);
+        Elfo novoElfo1 = new Elfo("Elfo1");
+        Elfo novoElfo2 = new Elfo("Elfo1");
+        Elfo novoElfo3 = new Elfo("Elfo1");
         // Act
-        novoElfo.atirarFlecha(dwarf);
-        novoElfo.atirarFlecha(dwarf);
-        novoElfo.atirarFlecha(dwarf);
-        novoElfo2.atirarFlecha(novoAnao);
+        novoElfo1.atirarFlecha(dwarf);
+        novoElfo2.atirarFlecha(dwarf);
+        novoElfo3.atirarFlecha(novoAnao);
         // Assert
-        assertEquals(80,dwarf.getQuantVida());
+        assertEquals(90,dwarf.getQuantVida());
         assertEquals(100,novoAnao.getQuantVida());
     }
     @Test 
