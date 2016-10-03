@@ -51,6 +51,10 @@ public class IrishDwarf
     public Status getStatus(){
         return status;
     }
+    
+    public Inventario getInventario(){
+        return inventario;
+    }
 
     public double getNumeroSorte(){
         double valorInicial = 101.0;
