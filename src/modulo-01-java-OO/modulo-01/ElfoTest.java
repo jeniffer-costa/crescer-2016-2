@@ -77,7 +77,7 @@ public class ElfoTest
         // Act
         novoElfo.atirarFlecha(dwarf);
         // Assert
-        assertEquals(100,dwarf.getQuantVida());
+        assertEquals(100,dwarf.getQuantVida(),0.001);
     }
     @Test       
     public void atirarDuasFlechasAnao(){
@@ -88,7 +88,7 @@ public class ElfoTest
         novoElfo.atirarFlecha(dwarf);
         novoElfo.atirarFlecha(dwarf);
         // Assert
-        assertEquals(90,dwarf.getQuantVida());
+        assertEquals(90,dwarf.getQuantVida(),0.001);
     }
     @Test       
     public void atirarFlechaDoisAnoes(){
@@ -101,8 +101,8 @@ public class ElfoTest
         novoElfo.atirarFlecha(dwarf);
         novoElfo2.atirarFlecha(novoAnao);
         // Assert
-        assertEquals(100,dwarf.getQuantVida());
-        assertEquals(100,novoAnao.getQuantVida());
+        assertEquals(100,dwarf.getQuantVida(),0.001);
+        assertEquals(100,novoAnao.getQuantVida(),0.001);
     }
     @Test       
     public void atirarQuantDiferentesFlechasAnoes(){
@@ -118,8 +118,8 @@ public class ElfoTest
         novoElfo2.atirarFlecha(dwarf);
         novoElfo3.atirarFlecha(novoAnao);
         // Assert
-        assertEquals(90,dwarf.getQuantVida());
-        assertEquals(100,novoAnao.getQuantVida());
+        assertEquals(90,dwarf.getQuantVida(),0.001);
+        assertEquals(100,novoAnao.getQuantVida(),0.001);
     }
     @Test 
     public void elfoToString(){
@@ -147,6 +147,12 @@ public class ElfoTest
     public void elfoNasceVivo(){
       Elfo novoElfo = new Elfo("Batman");
       assertEquals(Status.VIVO,novoElfo.getStatus());
+    }
+    
+    @Test
+    public void elfoNasceCom100DeVida(){
+      Elfo novoElfo = new Elfo("Batman");
+      assertEquals(100,novoElfo.getQuantVida(),0.001);
     }
 
 }
