@@ -1,10 +1,4 @@
-public class Elfo{
-    private String nome;
-    //private Item arco;
-    //private Item flechas;
-    private int experiencia;
-    private Status status;
-    private Inventario inventario;
+public class Elfo extends Personagem{
 
     public Elfo(String n){
         // chamando construtor de baixo
@@ -12,29 +6,12 @@ public class Elfo{
     }
     
     public Elfo(String n, int quantFlechas){
-        this.nome = n;
-        status = Status.VIVO;
-        inventario = new Inventario();
+        super(n);
         inventario.adicionarItem(new Item("Arco", 1));
         inventario.adicionarItem(new Item("Flechas", quantFlechas >= 0 ? quantFlechas : 42));
+        quantVida = 100;
     }
 
-    public void setNome(String n){
-        nome = n;
-    }
-
-    public String getNome(){
-        return nome;
-    }
-    public int getExperiencia(){
-        return experiencia;
-    }
-        public Status getStatus(){
-        return status;
-    }
-    public Inventario getInventario(){
-        return inventario;
-    }
     public String toString(){
        boolean flechaNoSingular = inventario.getItem(1).getQuantidade() == 1;
        boolean experienciaNoSingular = this.experiencia == 0 || this.experiencia == 1;
