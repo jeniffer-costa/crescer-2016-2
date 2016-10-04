@@ -1,13 +1,8 @@
 import java.util.ArrayList;
 
-public class Dwarf
+public class Dwarf extends Personagem
 {
-    private int quantVida = 110;
-    private DataTerceiraEra dataNascimento;
-    private String nome;
-    private int experiencia;
-    private Status status;
-    private Inventario inventario;
+    protected DataTerceiraEra dataNascimento;
 
     public Dwarf()
     {
@@ -18,9 +13,9 @@ public class Dwarf
 
     public Dwarf(String nome, DataTerceiraEra dataNascimento)
     {
-        this.nome = nome;
+        super (nome);
         this.dataNascimento = dataNascimento;
-        this.status = Status.VIVO;
+        this.quantVida = 110;
     }
 
     public void perdeVida(){
@@ -42,18 +37,6 @@ public class Dwarf
         }
     }
 
-    public int getQuantVida(){
-        return quantVida;
-    }
-
-    public Status getStatus(){
-        return status;
-    }
-    
-    public Inventario getInventario(){
-        return inventario;
-    }
-
     public double getNumeroSorte(){
         double valorInicial = 101.0;
         boolean ehBissexto = dataNascimento.ehBissexto();
@@ -65,15 +48,7 @@ public class Dwarf
         }
         return valorInicial;
     }
-
-    public void adicionarItem(Item item){
-        inventario.adicionarItem(item);
-    }
-
-    public void removerItem(Item item){
-        inventario.removerItem(item);
-    }
-
+    
     public void tentarSorte(){
         boolean temSorte = getNumeroSorte() == -3333;
 
@@ -81,4 +56,5 @@ public class Dwarf
             inventario.aumentarUnidadesDosItens(1000);
         }
     }
+    
 }
