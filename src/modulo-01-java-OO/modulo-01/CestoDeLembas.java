@@ -1,22 +1,12 @@
-
 public class CestoDeLembas
 {
-   private Item numLembas;
+   private int numLembas;
    
-    public CestoDeLembas()
+    public CestoDeLembas(int numLembas)
     {
-        numLembas = new Item("Lemba",1);
+        this.numLembas = numLembas;
     }
-    public boolean podeDividirEmPares(int num){
-        boolean resultado = false;
-        numLembas.setQuantidade(num);
-       if((numLembas.getQuantidade() % 2 == 0)&&(numLembas.getQuantidade() > 2)){
-           if((numLembas.getQuantidade() >= 1) && (numLembas.getQuantidade() <= 100)){
-         resultado = true;
-        }else{
-            resultado = false;
-        }
-     }
-     return resultado;
+    public boolean podeDividirEmPares(){
+        return (numLembas > 2 && numLembas <=100 && numLembas % 2 == 0);
     }
 }
