@@ -12,7 +12,7 @@ public class DwarfTest
         // Arrange
         Dwarf novoAnao = new Dwarf();
         // Assert e Act
-        assertEquals(110,novoAnao.getQuantVida());
+        assertEquals(110,novoAnao.getQuantVida(),0.001);
     }
     @Test 
     public void dwarfPerdeQuantVidas(){
@@ -20,7 +20,7 @@ public class DwarfTest
         Dwarf novoAnao = new Dwarf();
         // Act
         novoAnao.perdeVida();
-        assertEquals(100,novoAnao.getQuantVida());
+        assertEquals(100,novoAnao.getQuantVida(),0.001);
     }
     @Test 
     public void dwarfPerdeVinteVidas(){
@@ -29,7 +29,7 @@ public class DwarfTest
         // Act
         for(int i=0;i<20;i++)
         novoAnao.perdeVida();
-        assertEquals(0,novoAnao.getQuantVida());
+        assertEquals(0,novoAnao.getQuantVida(),0.001);
     }
     @Test
     public void dwarfNasceAno2016Mes05Dia12(){
@@ -94,7 +94,7 @@ public class DwarfTest
       Dwarf novoAnao = new Dwarf();
       for(int i=0;i<20;i++)
       novoAnao.perdeVida();
-      assertEquals(0,novoAnao.getQuantVida());
+      assertEquals(0,novoAnao.getQuantVida(),0.001);
     }
     @Test
     public void ElfoMataDwarf(){
@@ -111,7 +111,7 @@ public class DwarfTest
       novoElfo.atirarFlecha(novoAnao);
       novoElfo.atirarFlecha(novoAnao);
       novoElfo.atirarFlecha(novoAnao);
-      assertEquals(0,novoAnao.getQuantVida());
+      assertEquals(0,novoAnao.getQuantVida(),0.001);
     }
     @Test
     public void dwarfRecebe3Flechadas(){
@@ -120,7 +120,7 @@ public class DwarfTest
       novoElfo.atirarFlecha(novoAnao);
       novoElfo.atirarFlecha(novoAnao);
       novoElfo.atirarFlecha(novoAnao);
-      assertEquals(80,novoAnao.getQuantVida());
+      assertEquals(80,novoAnao.getQuantVida(),0.001);
     }
     @Test
     public void dwarfRecebe11Flechadas(){
@@ -137,7 +137,18 @@ public class DwarfTest
       novoElfo.atirarFlecha(novoAnao);
       novoElfo.atirarFlecha(novoAnao);
       novoElfo.atirarFlecha(novoAnao);
-      assertEquals(0,novoAnao.getQuantVida());
+      assertEquals(0,novoAnao.getQuantVida(),0.001);
+    }
+    
+    @Test
+    public void dwarfTentaSorteSemSorteNaoAumentaUnidadesItens(){
+      DataTerceiraEra novaData = new DataTerceiraEra(12,05,2022);
+      Dwarf novoAnao = new Dwarf("Meireles",novaData);
+      Inventario inventario = new Inventario();
+      Item arco = new Item("Arco",5);
+      inventario.adicionarItem(arco);
+      novoAnao.tentarSorte();
+      assertEquals(5,inventario.getItem(0).getQuantidade());
     }
     
  }
