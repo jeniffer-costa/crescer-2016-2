@@ -5,6 +5,11 @@ import org.junit.Test;
 
 public class ElfoNoturnoTest
 {
+        @After
+    public void tearDown(){
+      System.gc();
+    }
+    
     @Test
     public void elfoNoturnoNasceCom100deVida(){
         ElfoNoturno novoElfo = new ElfoNoturno("Superman");
@@ -53,7 +58,7 @@ public class ElfoNoturnoTest
         ElfoNoturno novoElfo = new ElfoNoturno("Superman");
         novoElfo.atirarFlecha(new Dwarf());
         novoElfo.atirarFlecha(new Dwarf());
-        assertEquals(90,novoElfo.getQuantVida(),0.001);
+        assertEquals(90.25,novoElfo.getQuantVida(),0.001);
     }
 
     @Test
@@ -67,14 +72,14 @@ public class ElfoNoturnoTest
         novoElfoY.atirarFlecha(new Dwarf());
         novoElfoY.atirarFlecha(new Dwarf());
         novoElfoY.atirarFlecha(new Dwarf());
-        assertEquals(90,novoElfoX.getQuantVida(),0.001);
-        assertEquals(75,novoElfoY.getQuantVida(),0.001);
+        assertEquals(90.25,novoElfoX.getQuantVida(),0.001);
+        assertEquals(77.37809375,novoElfoY.getQuantVida(),0.001);
     }
 
     @Test
     public void elfoNoturnoMorre(){
         ElfoNoturno novoElfo = new ElfoNoturno("Superman");
-        for(int i=0;i<20;i++){
+        for(int i=0;i<90;i++){
            novoElfo.atirarFlecha(new Dwarf());
         }
         assertEquals(Status.MORTO,novoElfo.getStatus());
@@ -88,4 +93,33 @@ public class ElfoNoturnoTest
         }
         assertEquals(Status.VIVO,novoElfo.getStatus());
     }
+    
+        @Test
+    public void quandoAtirarTresFlechasPerde14pontos() {
+        ElfoNoturno elfoNoturno = new ElfoNoturno("Night Legolas");
+        elfoNoturno.atirarFlecha(new Dwarf("Joe Doein", new DataTerceiraEra(1,1,1)));
+        elfoNoturno.atirarFlecha(new Dwarf("Joe Doein", new DataTerceiraEra(1,1,1)));
+        elfoNoturno.atirarFlecha(new Dwarf("Joe Doein", new DataTerceiraEra(1,1,1)));
+        assertEquals(85.7375, elfoNoturno.getQuantVida(), 0.); 
+    }
+
+    @Test
+    public void quandoAtirarMuitasFlechasStatusMorto() {
+        ElfoNoturno elfoSuiçida = new ElfoNoturno("Night Legolas");
+
+        for (int i = 0; i < 90; i++)
+                elfoSuiçida.atirarFlecha(new Dwarf("Joe Doein", new DataTerceiraEra(1,1,1)));
+
+        assertEquals(Status.MORTO, elfoSuiçida.getStatus());
+    }   
+    
+    @Test
+    public void elfoNoturnoSemFlechasPerdeVida() {
+        ElfoNoturno elfoSuiçida = new ElfoNoturno("Night Legolas");
+
+        for (int i = 0; i < 90; i++)
+                elfoSuiçida.atirarFlecha(new Dwarf("Joe Doein", new DataTerceiraEra(1,1,1)));
+
+        assertEquals(Status.MORTO, elfoSuiçida.getStatus());
+    }   
 }
