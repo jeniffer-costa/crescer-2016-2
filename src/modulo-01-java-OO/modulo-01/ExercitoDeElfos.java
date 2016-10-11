@@ -1,28 +1,25 @@
 import java.util.ArrayList;
 
-public class ExercitoDeElfos
+public class ExercitoDeElfos implements Exercito
 {
     private ArrayList<Elfo> elfosAlistados = new ArrayList<>();
 
     public ExercitoDeElfos(){
     }
 
-    public void alistarElfo(Elfo elfo){
+    public void alistar(Elfo elfo) throws NaoPodeAlistarException{
         boolean podeAlistar = elfo instanceof ElfoVerde || elfo instanceof ElfoNoturno;
-        if(podeAlistar){
-            elfosAlistados.add(elfo);
+        if(!podeAlistar){
+            throw new NaoPodeAlistarException();
         }
+        elfosAlistados.add(elfo);
     }
 
-    public ArrayList<Elfo> getElfosAlistados(){
-        return elfosAlistados;
+    public Elfo[] getAlistados() {
+        return elfosAlistados.toArray(new Elfo[elfosAlistados.size()]);
     }
 
-    public Elfo getElfoAlistado(int index){
-        return elfosAlistados.get(index);
-    }
-
-    public Elfo buscarElfoPeloNome(String buscaNome){
+    public Elfo buscar(String buscaNome){
         Elfo encontrouNome = null;
         for(int i=0;i<elfosAlistados.size();i++){
             if (elfosAlistados.get(i).getNome().equals(buscaNome)){
