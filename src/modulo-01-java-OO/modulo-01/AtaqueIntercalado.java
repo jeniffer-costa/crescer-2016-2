@@ -35,11 +35,15 @@ public class AtaqueIntercalado implements EstrategiaDeAtaque
         return ehProporcional;
     }
 
-    public List<Elfo> ordenarIntercalado(List<Elfo> atacantes){
+    public List<Elfo> ordenarIntercalado(List<Elfo> atacantes)throws ContingenteDesproporcionalException{
         ArrayList<Elfo> sohElfosVerdes = new ArrayList();
         ArrayList<Elfo> sohElfosNoturnos = new ArrayList();
         ArrayList<Elfo> ordemIntercalado = new ArrayList();
         
+        
+        if(!verificarSeBatalhaoEhProporcional(atacantes)){
+          throw new ContingenteDesproporcionalException();
+        }else{
         for(int i=0;i<atacantes.size();i++){
             boolean ehVivo = atacantes.get(i).getStatus().equals(Status.VIVO);
             if(ehVivo && atacantes.get(i) instanceof ElfoVerde ){
@@ -49,12 +53,17 @@ public class AtaqueIntercalado implements EstrategiaDeAtaque
                 sohElfosNoturnos.add(atacantes.get(i));
             }
         }
-        while(ordemIntercalado.size() != atacantes.size()){
-            for(int i=0;i<atacantes.size();i++){
+            for(int i=0;i<sohElfosVerdes.size();i++){
+                // verifico se o primeiro elfo é verde.
+                if(atacantes.get(0) instanceof ElfoVerde){
                 ordemIntercalado.add(sohElfosVerdes.get(i));
                 ordemIntercalado.add(sohElfosNoturnos.get(i));
+              }else{
+                  ordemIntercalado.add(sohElfosNoturnos.get(i));
+                  ordemIntercalado.add(sohElfosVerdes.get(i));
+                }
             }
-       }
         return ordemIntercalado;
     }
+}
 }
