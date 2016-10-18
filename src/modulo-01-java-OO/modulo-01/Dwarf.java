@@ -31,7 +31,7 @@ public class Dwarf extends Personagem
                     quantVida = 0;
                 }
             }
-            if (getQuantVida() == 0){
+            if ((int)this.getQuantVida() == 0){
                 status = Status.MORTO;
             }
         }

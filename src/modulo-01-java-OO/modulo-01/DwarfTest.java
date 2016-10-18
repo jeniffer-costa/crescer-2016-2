@@ -7,6 +7,12 @@ import org.junit.Test;
 
 public class DwarfTest
 {
+    
+        @After
+    public void tearDown(){
+      System.gc();
+    }
+    
     @Test
     public void dwarfNasceComQuantVidas(){
         // Arrange
@@ -85,8 +91,9 @@ public class DwarfTest
     @Test
     public void dwarfMorre(){
         Dwarf novoAnao = new Dwarf();
-        for(int i=0;i<=10;i++)
+        for(int i=0;i<=10;i++){
         novoAnao.perdeVida();
+    }
         assertEquals(Status.MORTO,novoAnao.getStatus());
     }
     @Test
