@@ -19,10 +19,6 @@ public class ElfoVerde extends Elfo
             dwarf.perdeVida();
         }
     }
-
-    public void alistarElfo(ElfoVerde elfo){
-        super.alistarElfo(elfo);
-    }
     
     @Override
     protected void inicializarInventario(int quantidadeFlechas) {
