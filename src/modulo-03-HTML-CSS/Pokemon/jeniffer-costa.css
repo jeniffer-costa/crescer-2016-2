@@ -1,0 +1,140 @@
+body{
+    background-image: url(http://www.freehdimages.in/uploads/large/desktop-hd-oranges-photo.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+header > h1{
+    text-align: center
+}
+
+.autenticacao > a, nav > a{
+  margin: 0 0 0 30px;
+}
+.autenticacao{
+  font-size: 20px;
+  background-color: rgba(230,230,230,0.6);
+  width: 230px;
+  height: 60px;
+  margin: auto 1050px;
+  border-radius: 15px;
+}
+
+nav:nth-child(2){
+  margin-top: 20;
+  text-align: center;
+  vertical-align: middle;
+  background-color:rgba(230,230,230,0.6);
+}
+
+
+a:link{
+    color: black;
+    text-decoration:none;
+}
+
+.historia-pokemon{
+    padding: 20px;
+    width: 1000px;
+    background-color:rgba(230,230,230,0.6);
+    margin: 100px auto;
+    text-align: justify;
+    border-radius: 15px;
+}
+.personagens{
+    padding: 15px;
+    background-color:rgba(230,230,230,0.6);
+    margin: 15px 150px;
+    text-align: justify;
+    border-radius: 15px;
+    overflow: scroll;
+    width: 500px;
+    height: 550px;
+    border-radius: 15px;
+    position: absolute;
+    
+}
+
+.treinadores-pokemon{
+  margin-left: 700px;
+  margin-top: 10px;
+  padding: 15px;
+  background-color:rgba(230,230,230,0.6);
+  text-align: justify;
+  border-radius: 15px;
+  overflow: scroll;
+  width: 500px;
+  height: 550px;
+  border-radius: 15px;
+  position: absolute;
+}
+
+.personagens > ul{
+    list-style:none;
+    cursor: pointer;
+}
+.treinadores-pokemon > ul{
+    list-style:none;
+    cursor: pointer;
+}
+.personagens > ul > li{
+background-repeat:no-repeat;
+list-style-image: url(https://pokemonrerdthunder.files.wordpress.com/2011/04/pokeball.png);
+font-size: 20px;
+ padding-bottom: 10px;
+  margin-bottom:10px;
+}
+
+.treinadores-pokemon> ul > li{
+background-repeat:no-repeat;
+list-style-image: url(https://pokemonrerdthunder.files.wordpress.com/2011/04/pokeball.png);
+font-size: 20px;
+ padding-bottom: 10px;
+  margin-bottom:10px;
+}
+
+footer{
+  position: relative;
+  bottom: 0;
+  text-align: right;
+}
+
+.historia-digimon{
+    display: none;
+}
+
+.treinadores-pokemon li:first-child:hover:after{
+content: url(http://vignette2.wikia.nocookie.net/pokemonshow/images/c/c2/Ash_Ketchum_BW.png/revision/latest?cb=20110128170608&path-prefix=pt-br);
+display: block;
+position: absolute;
+left: 250px;
+}
+
+.treinadores-pokemon li:nth-of-type(2):hover:after{
+content: url(https://upload.wikimedia.org/wikipedia/pt/b/b1/MistyEP.png);
+display: block;
+position: absolute;
+left: 250px;
+}
+
+.treinadores-pokemon li:nth-of-type(3):hover:after{
+content: url(https://upload.wikimedia.org/wikipedia/en/7/71/DP-Brock.png);
+display: block;
+position: absolute;
+left: 250px;
+}
+
+header h1 span:nth-child(1) {  
+   display: none;  
+}
+
+.personagens h2:nth-of-type(2) {
+    display: none;
+}
+
+.personagens ul:nth-of-type(2){
+   display: none;   
+}
+.digiescolhidos{
+    display: none;
+}
