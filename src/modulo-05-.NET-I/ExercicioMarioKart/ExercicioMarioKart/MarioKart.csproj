@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="Corredor.cs" />
     <Compile Include="Dinam.cs" />
+    <Compile Include="Equipamentos\FogueteDePlutonio.cs" />
+    <Compile Include="Equipamentos\UltraPack.cs" />
     <Compile Include="Karts\Sonnar.cs" />
     <Compile Include="Light.cs" />
     <Compile Include="NivelHabilidade.cs" />
