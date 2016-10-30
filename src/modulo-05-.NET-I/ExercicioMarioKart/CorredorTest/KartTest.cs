@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ExercicioMarioKart;
 using ExercicioMarioKart.Equipamentos;
+using ExercicioMarioKart.Karts;
 
 namespace CorredorTest
 {
@@ -143,6 +144,5 @@ namespace CorredorTest
 
             Assert.AreEqual(27, kart.Velocidade);
         }
-
     }
 }
