@@ -1,0 +1,29 @@
+﻿@model StreetFighter.Web.Models.SobreMimModel
+
+@{
+    ViewBag.Title = "SobreMim";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="inicio">
+    <h2>Sobre </h2>
+</div>
+
+    <h2>Jeniffer Costa</h2>
+    <p>
+        <img align="left" src="~/Content/Images/ninja.png" />
+
+        <strong>Nome:</strong> @Model.Nome<br>
+        <strong>Nascimento:</strong> @Model.DataNascimento<br>
+        <strong>Altura:</strong> @Model.Altura cm.<br>
+        <strong>Peso:</strong> @Model.Peso kg.<br>
+        <strong>Time:</strong> @Model.Time<br>
+        <strong>Profissão:</strong> @Model.Profissao<br>
+        <strong>Habilidades especiais:</strong> @Model.HabilidadesEspeciais<br>
+        <strong>Gosta:</strong> @Model.Gosta<br>
+        <strong>Desgosta:</strong> @Model.Desgosta<br>
+        <strong>Universidade:</strong> @Model.Universidade<br>
+        <strong>Curso:</strong> @Model.Curso<br>
+        <strong>Uma fala de vitória:</strong> @Model.FalaDeVitoria<br>
+        <strong>Objetivo:</strong> @Model.Objetivo<br />
+    </p>
+

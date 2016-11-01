@@ -1,0 +1,27 @@
+﻿
+@{
+    Layout = null;
+}
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link href="~/Content/estilo.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="menu">
+        <a href="~/StreetFighter/Index">Inicio</a>
+        <a href="https://www.google.com.br/search?q=Street+Fighter&rlz=1C1PRFC_enBR672BR672&oq=Street+Fighter&aqs=chrome..69i57j69i60j0l4.252j0j8&sourceid=chrome&ie=UTF-8#q=Street+Fighter&tbm=nws">Noticias</a>
+        <a href="~/StreetFighter/FichaTecnica">Ficha Técnica</a>
+        <a href="~/StreetFighter/SobreMim">Sobre Mim</a>
+    </div>
+
+    <div class="conteudo">
+        @RenderBody() 
+    </div>
+
+</body>
+
+</html>
