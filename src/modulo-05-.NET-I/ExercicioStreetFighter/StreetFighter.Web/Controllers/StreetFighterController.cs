@@ -20,7 +20,7 @@ namespace StreetFighter.Web.Controllers
             var AtributosFichaTecnica = new FichaTecnicaModel();
             AtributosFichaTecnica.Imagem = "http://www.streetfighter.com.br/upload/editor/20120823194105_127.png";
             AtributosFichaTecnica.Nome = "Blanka";
-            AtributosFichaTecnica.DataNascimento = "12 de Fevereiro de 1966";
+            AtributosFichaTecnica.DataNascimento = Convert.ToDateTime("12/02/1966");
             AtributosFichaTecnica.Altura = 192;
             AtributosFichaTecnica.Peso = 96;
             AtributosFichaTecnica.PersonagemOculto = true;
@@ -36,7 +36,7 @@ namespace StreetFighter.Web.Controllers
 
             var AtributosSobreMim = new SobreMimModel();
             AtributosSobreMim.Nome = "Jeniffer da Silva Costa";
-            AtributosSobreMim.DataNascimento = culture.TextInfo.ToTitleCase(dtfi.GetMonthName(Convert.ToDateTime("04/12/1991").Month));
+            AtributosSobreMim.DataNascimento = Convert.ToDateTime("04/12/1991");
             AtributosSobreMim.Altura = 160;
             AtributosSobreMim.Peso = 60;
             AtributosSobreMim.Time = "Grêmio Football Porto Alegrense.";
