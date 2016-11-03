@@ -46,12 +46,8 @@ div.inicio{
 div.conteudo{
     padding: 10px;
     width: 600px;
-    height: 1250px;
     background-color:rgb(230,230,230);
     margin: -35px auto;
 }
 
-div.conteudo #blanka #sobre{
-    height: 600px;
-}
 
