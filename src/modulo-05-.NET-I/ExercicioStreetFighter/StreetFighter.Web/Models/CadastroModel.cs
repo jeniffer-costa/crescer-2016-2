@@ -36,6 +36,7 @@ namespace StreetFighter.Web.Models
         [DisplayName("Personagem Oculto")]
         public bool PersonagemOculto { get; set; }
 
+        [Required]
         [DisplayName("Origem:")]
         public String Origem { get; set; }
     }
