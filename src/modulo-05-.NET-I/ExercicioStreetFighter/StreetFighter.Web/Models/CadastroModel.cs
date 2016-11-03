@@ -18,7 +18,7 @@ namespace StreetFighter.Web.Models
 
         [Required]
         [DisplayName("Nascimento:")]
-        public string DataNascimento { get; set; }
+        public DateTime DataNascimento { get; set; }
 
         [Required]
         [DisplayName("Altura:")]
