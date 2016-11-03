@@ -10,7 +10,7 @@ namespace StreetFighter.Web.Models
     {
         public string Imagem { get; set; }
         public String Nome { get; set; }
-        public String DataNascimento { get; set; }
+        public DateTime DataNascimento { get; set; }
         public int Altura { get; set; }
         public int Peso { get; set; }
 
