@@ -8,7 +8,7 @@ namespace StreetFighter.Web.Models
     public class SobreMimModel
     {
         public String Nome;
-        public DateTime DataNascimento;
+        public String DataNascimento;
         public int Altura;
         public decimal Peso;
         public String Time;
