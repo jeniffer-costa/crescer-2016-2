@@ -18,7 +18,7 @@ namespace StreetFighter.Web.Controllers
         public ActionResult FichaTecnica()
         {
             var AtributosFichaTecnica = new FichaTecnicaModel();
-            AtributosFichaTecnica.Imagem = "http://www.streetfighter.com.br/upload/editor/20120823194105_127.png";
+            AtributosFichaTecnica.Imagem = "/Content/Images/blanka.png";
             AtributosFichaTecnica.Nome = "Blanka";
             AtributosFichaTecnica.DataNascimento = Convert.ToDateTime("12/02/1966");
             AtributosFichaTecnica.Altura = 192;

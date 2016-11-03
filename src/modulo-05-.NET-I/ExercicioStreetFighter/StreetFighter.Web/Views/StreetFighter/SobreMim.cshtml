@@ -1,4 +1,6 @@
-﻿@model StreetFighter.Web.Models.SobreMimModel
+﻿@using System.Globalization;
+
+@model StreetFighter.Web.Models.SobreMimModel
 
 @{
     ViewBag.Title = "SobreMim";
@@ -12,8 +14,20 @@
     <p>
         <img align="left" src="~/Content/Images/ninja.png" />
 
+        @{
+            CultureInfo culture = new CultureInfo("pt-BR");
+            DateTimeFormatInfo dtfi = culture.DateTimeFormat;
+
+            int dia = Model.DataNascimento.Day;
+            int ano = Model.DataNascimento.Year;
+            string mes = culture.TextInfo.ToTitleCase(dtfi.GetMonthName(Model.DataNascimento.Month));
+
+            string data = dia + " de " + mes + " de " + ano;
+
+        }
+
         <strong>Nome:</strong> @Model.Nome<br>
-        <strong>Nascimento:</strong> @Model.DataNascimento<br>
+        <strong>Nascimento:</strong> @data<br>
         <strong>Altura:</strong> @Model.Altura cm.<br>
         <strong>Peso:</strong> @Model.Peso kg.<br>
         <strong>Time:</strong> @Model.Time<br>
