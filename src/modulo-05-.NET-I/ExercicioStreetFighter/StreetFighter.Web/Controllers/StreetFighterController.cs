@@ -15,6 +15,17 @@ namespace StreetFighter.Web.Controllers
         {
             return View();
         }
+
+        public ActionResult Listagem()
+        {
+            return View();
+        }
+
+        public ActionResult Cadastrar(FichaTecnicaModel model)
+        {
+            return RedirectToAction("Cadastro");
+        }
+
         public ActionResult FichaTecnica()
         {
             var AtributosFichaTecnica = new FichaTecnicaModel();
@@ -78,6 +89,7 @@ namespace StreetFighter.Web.Controllers
 
             if (ModelState.IsValid)
             {
+
                 ViewBag.Mensagem = "Cadastro concluído com sucesso.";
                 return View("FichaTecnica", model);
             }

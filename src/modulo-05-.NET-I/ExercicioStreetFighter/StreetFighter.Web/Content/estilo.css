@@ -17,6 +17,7 @@ div.menu{
     border: 1px solid white;
     width:470px;height: 20px;
     background-color:rgba(140,140,140,0.6);
+    box-sizing: border-box;
     
 }
 
