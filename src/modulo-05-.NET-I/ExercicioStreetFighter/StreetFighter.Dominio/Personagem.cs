@@ -8,9 +8,8 @@ namespace StreetFighter.Dominio
 {
     public class Personagem
     {
-        private string personagem;
-
-        public int Id { get; private set; }
+        public int Id { get; set; }
+        public string Imagem { get; private set; }
         public string Nome { get; private set; }
         public string Origem { get; private set; }
         public DateTime DataNascimento { get; private set; }
@@ -19,20 +18,22 @@ namespace StreetFighter.Dominio
         public string GolpesEspeciais { get; set; }
         public bool PersonagemOculto { get; set; }
 
-        public Personagem(int id, string nome, string origem, DateTime dataNascimento, int altura, decimal peso, string golpesEspeciais, bool personagemOculto)
-            : this(nome, origem, dataNascimento, altura, peso, golpesEspeciais, personagemOculto)
+        public Personagem(int id,string nome, string imagem, string origem, DateTime dataNascimento, int altura, decimal peso, string golpesEspeciais,bool personagemOculto)
         {
             this.Id = id;
-        }
-
-        public Personagem(string nome, string origem, DateTime dataNascimento, int altura, decimal peso, string golpesEspeciais,bool personagemOculto)
-        {
             this.Nome = nome;
+            this.Imagem = imagem;
             this.Origem = origem;
             this.DataNascimento = dataNascimento;
+            this.Altura = altura;
             this.Peso = peso;
             this.GolpesEspeciais = golpesEspeciais;
             this.PersonagemOculto = personagemOculto;
+        }
+
+        public override string ToString()
+        {
+            return $"{Id}; {Nome}; {DataNascimento}; {Altura}; {Peso}; {Origem}; {Imagem}; {PersonagemOculto}";
         }
     }
 }

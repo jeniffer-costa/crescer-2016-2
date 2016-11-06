@@ -6,11 +6,14 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
+using StreetFighter.Aplicativo;
+using StreetFighter.Dominio;
 
 namespace StreetFighter.Web.Controllers
 {
     public class StreetFighterController : Controller
     {
+        private readonly PersonagemAplicativo personagem;
         public ActionResult Index()
         {
             return View();
@@ -26,17 +29,18 @@ namespace StreetFighter.Web.Controllers
             return RedirectToAction("Cadastro");
         }
 
-        public ActionResult FichaTecnica()
+        public ActionResult FichaTecnica(Personagem personagem)
         {
             var AtributosFichaTecnica = new FichaTecnicaModel();
-            AtributosFichaTecnica.Imagem = "/Content/Images/blanka.png";
-            AtributosFichaTecnica.Nome = "Blanka";
-            AtributosFichaTecnica.DataNascimento = Convert.ToDateTime("12/02/1966");
-            AtributosFichaTecnica.Altura = 192;
-            AtributosFichaTecnica.Peso = 96;
-            AtributosFichaTecnica.PersonagemOculto = true;
-            AtributosFichaTecnica.Origem = "Brasil";
-            AtributosFichaTecnica.GolpesEspeciais = "Electric Thunder,Rolling Attack.";
+            AtributosFichaTecnica.Imagem = personagem.Imagem;
+            AtributosFichaTecnica.Nome = personagem.Nome;
+            AtributosFichaTecnica.DataNascimento = personagem.DataNascimento;
+            AtributosFichaTecnica.Altura = personagem.Altura;
+            AtributosFichaTecnica.Peso = personagem.Peso;
+            AtributosFichaTecnica.PersonagemOculto = personagem.PersonagemOculto;
+            AtributosFichaTecnica.Origem = personagem.Origem;
+            AtributosFichaTecnica.GolpesEspeciais = personagem.GolpesEspeciais;
+            new PersonagemAplicativo().Salvar(personagem);
             return View(AtributosFichaTecnica);
         }
 
@@ -65,6 +69,7 @@ namespace StreetFighter.Web.Controllers
         public ActionResult Cadastro(FichaTecnicaModel model)
         {
             PopularOrigem();
+
             return View();
         }
 
@@ -89,8 +94,13 @@ namespace StreetFighter.Web.Controllers
 
             if (ModelState.IsValid)
             {
-
                 ViewBag.Mensagem = "Cadastro concluído com sucesso.";
+                PersonagemAplicativo personagemAplicativo = new PersonagemAplicativo();
+                Personagem personagem = new Personagem(model.Id,model.Nome,model.Imagem, model.Origem, model.DataNascimento, model.Altura, model.Peso, model
+                    .GolpesEspeciais,model.PersonagemOculto);
+
+                personagemAplicativo.Salvar(personagem);
+
                 return View("FichaTecnica", model);
             }
             else

@@ -8,6 +8,7 @@ namespace StreetFighter.Web.Models
 {
     public class FichaTecnicaModel
     {
+        public int Id { get; set; }
         public string Imagem { get; set; }
         public String Nome { get; set; }
         public DateTime DataNascimento { get; set; }
