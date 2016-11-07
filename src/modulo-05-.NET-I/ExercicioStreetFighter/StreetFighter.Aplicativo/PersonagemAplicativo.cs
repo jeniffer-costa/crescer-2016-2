@@ -18,9 +18,19 @@ namespace StreetFighter.Aplicativo
             this.repositorio = new PersonagemRepositorio();
         }
 
-        public List<Personagem> ListarPersonagens(string Filtro)
+        public Personagem BuscarPorId(int id)
         {
-            throw new NotImplementedException();
+            return this.repositorio.BuscarPorId(id);
+        }
+
+        public void Editar(Personagem personagem)
+        {
+            this.repositorio.EditarPersonagem(personagem);
+        }
+
+        public List<Personagem> ListarPersonagens(string filtro = null)
+        {
+            return repositorio.ListarPersonagens(filtro);
         }
 
         public void Salvar(Personagem personagem)

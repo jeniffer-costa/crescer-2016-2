@@ -154,6 +154,7 @@
     </Compile>
     <Compile Include="Models\CadastroModel.cs" />
     <Compile Include="Models\FichaTecnicaModel.cs" />
+    <Compile Include="Models\PersonagemModel.cs" />
     <Compile Include="Models\SobreMimModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -165,7 +166,7 @@
     <Content Include="Views\StreetFighter\FichaTecnica.cshtml" />
     <Content Include="Views\StreetFighter\SobreMim.cshtml" />
     <Content Include="Views\StreetFighter\Cadastro.cshtml" />
-    <Content Include="Views\StreetFighter\Listagem.cshtml" />
+    <Content Include="Views\StreetFighter\ListaDePersonagens.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
