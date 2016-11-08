@@ -9,6 +9,8 @@ namespace StreetFighter.Web.Models
 {
     public class CadastroModel
     {
+        public int? Id { get; set; }
+
         [DisplayName("URL da Imagem:")]
         public string Imagem { get; set; }
 

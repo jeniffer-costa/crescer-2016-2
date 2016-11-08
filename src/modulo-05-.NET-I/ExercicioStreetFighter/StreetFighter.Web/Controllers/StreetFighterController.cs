@@ -19,9 +19,9 @@ namespace StreetFighter.Web.Controllers
             return View();
         }
 
-        public ActionResult ListaDePersonagens(string filtro = null)
+        public ActionResult ListaDePersonagens(string filtro)
         {
-            var model = new PersonagemAplicativo().ListarPersonagens(filtro);
+            var model = new PersonagemAplicativo().ListarPersonagensSQL(filtro);
             return View(model);
         }
 
@@ -32,18 +32,20 @@ namespace StreetFighter.Web.Controllers
 
         public ActionResult FichaTecnica(int id)
         {
-            var personagem = new PersonagemAplicativo().BuscarPorId(id);
+            var personagem = new PersonagemAplicativo().BuscarPorIdSQL(id);
 
-            var model = new Personagem(
-            personagem.Id,
-            personagem.Nome = personagem.Nome,
-            personagem.DataNascimento,
-            personagem.Altura,
-            personagem.Peso,
-            personagem.Origem,
-            personagem.GolpesEspeciais,
-            personagem.Imagem,
-            personagem.PersonagemOculto);
+            var model = new FichaTecnicaModel()
+            {
+            Id = personagem.Id,
+            Nome = personagem.Nome,
+            DataNascimento = personagem.DataNascimento,
+            Altura = personagem.Altura,
+            Peso = personagem.Peso,
+            Origem = personagem.Origem,
+            GolpesEspeciais = personagem.GolpesEspeciais,
+            Imagem = personagem.Imagem,
+            PersonagemOculto = personagem.PersonagemOculto
+            };
             return View(model);
         }
 
@@ -99,11 +101,10 @@ namespace StreetFighter.Web.Controllers
             {
                 ViewBag.Mensagem = "Cadastro concluído com sucesso.";
                 PersonagemAplicativo personagemAplicativo = new PersonagemAplicativo();
-                Personagem personagem = new Personagem(model.Id,model.Nome, model.DataNascimento, model.Altura, model.Peso, model.Origem, model.Imagem, model
-                    .GolpesEspeciais,model.PersonagemOculto);
-
-                personagemAplicativo.Salvar(personagem);
-
+                Personagem personagem = new Personagem(model.Id,model.Nome, model.DataNascimento, 
+                                                       model.Altura, model.Peso, model.Origem, model.Imagem, 
+                                                       model.GolpesEspeciais,model.PersonagemOculto);
+                personagemAplicativo.SalvarSQL(personagem);
                 return View("FichaTecnica", model);
             }
             else
@@ -115,20 +116,36 @@ namespace StreetFighter.Web.Controllers
 
         public ActionResult Editar(int id)
         {
-            PopularOrigem();
-            var personagem = new PersonagemAplicativo().BuscarPorId(id);
+            var personagem = new PersonagemAplicativo().BuscarPorIdSQL(id);
 
             var model = new Personagem(
-            personagem.Id,
+            personagem.Id = personagem.Id,
             personagem.Nome = personagem.Nome,
             personagem.DataNascimento,
             personagem.Altura,
             personagem.Peso,
             personagem.Origem,
-            personagem.GolpesEspeciais,
             personagem.Imagem,
+            personagem.GolpesEspeciais,
             personagem.PersonagemOculto);
-            return View("Cadastro");
+            return RedirectToAction("Cadastro", model);
+
+        }
+
+        public ActionResult Excluir(int id)
+        {
+            var personagemAplicativo = new PersonagemAplicativo();
+            var personagem = personagemAplicativo.BuscarPorIdSQL(id);
+
+            personagemAplicativo.ExcluirSQL(id);
+
+            return RedirectToAction("ListaDePersonagens");
+        }
+
+        public ActionResult Visualizar(int id)
+        {
+            var personagem = new PersonagemAplicativo().BuscarPorIdSQL(id);
+            return RedirectToAction("FichaTecnica", personagem);
 
         }
     }
