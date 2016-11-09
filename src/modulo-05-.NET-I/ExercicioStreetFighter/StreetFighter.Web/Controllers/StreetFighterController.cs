@@ -13,7 +13,6 @@ namespace StreetFighter.Web.Controllers
 {
     public class StreetFighterController : Controller
     {
-        private readonly PersonagemAplicativo personagem;
         public ActionResult Index()
         {
             return View();
@@ -40,7 +39,7 @@ namespace StreetFighter.Web.Controllers
 
         public ActionResult FichaTecnica(int id)
         {
-            var personagem = new PersonagemAplicativo().BuscarPorIdSQL(id);
+            var personagem = new PersonagemAplicativo().BuscarPorIdEF(id);
 
             var model = new FichaTecnicaModel()
             {
@@ -118,7 +117,7 @@ namespace StreetFighter.Web.Controllers
                                             model.Imagem, 
                                             model.GolpesEspeciais,model.PersonagemOculto);
 
-                personagemAplicativo.SalvarSQL(personagem);
+                personagemAplicativo.SalvarEF(personagem);
 
                 return View("FichaTecnica", model);
             }
@@ -131,28 +130,29 @@ namespace StreetFighter.Web.Controllers
 
         public ActionResult Editar(int id)
         {
-            var personagem = new PersonagemAplicativo().BuscarPorIdSQL(id);
-
-            var model = new Personagem(
-            personagem.Id = personagem.Id,
-            personagem.Nome = personagem.Nome,
-            personagem.DataNascimento,
-            personagem.Altura,
-            personagem.Peso,
-            personagem.Origem,
-            personagem.Imagem,
-            personagem.GolpesEspeciais,
-            personagem.PersonagemOculto);
-            return RedirectToAction("Cadastro", model);
-
+            var personagemAplicativo = new PersonagemAplicativo();
+            var personagem = personagemAplicativo.BuscarPorIdEF(id);
+            PopularOrigem();
+            var model = new CadastroModel()
+                {
+                    Id = personagem.Id,
+                    Nome = personagem.Nome,
+                    DataNascimento = personagem.DataNascimento,
+                    Altura = personagem.Altura,
+                    Peso = personagem.Peso,
+                    Origem = personagem.Origem,
+                    Imagem = personagem.Imagem,
+                    GolpesEspeciais = personagem.GolpesEspeciais,
+                    PersonagemOculto = personagem.PersonagemOculto
+                };
+                return View("Cadastro", model);
         }
 
         public ActionResult Excluir(int id)
         {
             var personagemAplicativo = new PersonagemAplicativo();
-            var personagem = personagemAplicativo.BuscarPorIdSQL(id);
-
-            personagemAplicativo.ExcluirSQL(id);
+            var personagem = personagemAplicativo.ListarPersonagensEF(null).Where(p => p.Id == id).ToList().ElementAt(0);
+            personagemAplicativo.ExcluirEF(personagem);
 
             return RedirectToAction("ListaDePersonagens");
         }

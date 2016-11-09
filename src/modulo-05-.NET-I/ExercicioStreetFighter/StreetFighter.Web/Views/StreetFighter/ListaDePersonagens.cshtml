@@ -34,15 +34,17 @@
             <h3>Personagens Cadastrados:</h3>
             foreach (var personagem in Model)
             {
-               
+                <div class="personagens">
+
                     <strong>@personagem.Nome</strong>
                     <br />
                     <a href='@Url.Action("FichaTecnica", "StreetFighter",new { id = personagem.Id } )'>
-                    <img src="@personagem.Imagem" align="left" height="90" width="90" /></a>
+                        <img src="@personagem.Imagem" align="left" height="90" width="90" />
+                    </a>
                     <br />
                     @Html.ActionLink("Editar", "Editar", new { id = personagem.Id }, new { @class = "btn btn-default" })
                     @Html.ActionLink("Excluir", "Excluir", new { id = personagem.Id }, new { @class = "btn btn-default" })
-
+                </div>
             <br />
             <br />
             <br />

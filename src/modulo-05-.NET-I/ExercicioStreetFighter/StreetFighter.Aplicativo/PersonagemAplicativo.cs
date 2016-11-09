@@ -13,7 +13,7 @@ namespace StreetFighter.Aplicativo
     public class PersonagemAplicativo
     {
         private readonly PersonagemRepositorio repositorio;
-        private readonly PersonagemRepositorioEF repositorioEF;
+        
 
         public PersonagemAplicativo()
         {
@@ -30,11 +30,21 @@ namespace StreetFighter.Aplicativo
             return this.repositorio.BuscarPorIdSQL(id);
         }
 
+        public Personagem BuscarPorIdEF(int id)
+        {
+            PersonagemRepositorioEF personagemRepositorioEF = new PersonagemRepositorioEF();
+            return personagemRepositorioEF.BuscarPorIdEF(id);
+        }
         public void Editar(Personagem personagem)
         {
             this.repositorio.EditarPersonagemSQL(personagem);
         }
 
+        public void EditarEF(Personagem personagem)
+        {
+            PersonagemRepositorioEF personagemRepositorioEF = new PersonagemRepositorioEF();
+            personagemRepositorioEF.EditarPersonagemEF(personagem);
+        }
         public void Excluir(Personagem personagem)
         {
             this.repositorio.ExcluirPersonagem(personagem);
@@ -45,7 +55,11 @@ namespace StreetFighter.Aplicativo
             this.repositorio.ExcluirPersonagemSQL(id);
         }
 
-
+        public void ExcluirEF(Personagem personagem)
+        {
+            PersonagemRepositorioEF personagemRepositorioEF = new PersonagemRepositorioEF();
+            personagemRepositorioEF.ExcluirPersonagemEF(personagem);
+        }
 
         public List<Personagem> ListarPersonagens(string filtro = null)
         {
@@ -59,7 +73,8 @@ namespace StreetFighter.Aplicativo
 
         public List<Personagem> ListarPersonagensEF(string filtroNome)
         {
-            return repositorioEF.ListarPersonagensEF(filtroNome);
+            PersonagemRepositorioEF personagemRepositorioEF = new PersonagemRepositorioEF();
+            return personagemRepositorioEF.ListarPersonagensEF(filtroNome);
         }
 
         public void Salvar(Personagem personagem)
@@ -68,6 +83,12 @@ namespace StreetFighter.Aplicativo
                 repositorio.AdicionarPersonagem(personagem);
             else
                 Console.WriteLine("Editar");
+        }
+
+        public void SalvarEF(Personagem personagem)
+        {
+            PersonagemRepositorioEF personagemRepositorioEF = new PersonagemRepositorioEF();
+            personagemRepositorioEF.AdicionarPersonagemEF(personagem);       
         }
 
         public void SalvarSQL(Personagem personagem)

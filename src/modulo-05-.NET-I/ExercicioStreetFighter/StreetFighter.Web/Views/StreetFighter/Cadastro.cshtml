@@ -14,10 +14,10 @@
     @*Se estiver vazia, não é preenchido*@
     <h3>@ViewBag.Mensagem</h3>
 <p>
+   
+   
         @using (Html.BeginForm("Salvar", "StreetFighter", FormMethod.Post, new { @class = "form-horizontal" }))
         {
-         
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Imagem, new { @class = "col-sm-2 control-label" })
