@@ -3,44 +3,50 @@
     ViewBag.Title = "ListaDePersonagens";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
 <div class="inicio">
     <h2>Lista de Personagens </h2>
 </div>
-
-@using (Html.BeginForm("Cadastro", "StreetFighter", FormMethod.Post, new { @class = "form-horizontal" }))
-{
-
-    <button type="submit" class="btn btn-default">Cadastrar</button>
-}
+<br />
+<br />
+@Html.ActionLink("Cadastrar Personagem", "Cadastro", null, new { @class = "col-sm-4 btn btn-default", id = "Cadastrar" })
+<br />
+<br />
+<br />
+<br />
 
 @using (Html.BeginForm("ListaDePersonagens", "StreetFighter", FormMethod.Get))
 {
-<label>Filtro:</label>
-<input type="text" name="filtro"/>
-<button type="submit" class="btn btn-default">Filtrar</button>
-<br />
-<br />
+    <form class="navbar-form navbar-right" role="search" id="pesquisa">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Digite o nome" name="filtro">
+        </div>
+        <button type="submit" class="btn btn-default">Pesquisar</button>
+    </form>
 }
+    @{
+        if (Model == null)
+        {
+            <h1>Nenhum Personagem Cadastrado !</h1>
+        }
+        else
+        {
+            <h3>Personagens Cadastrados:</h3>
+            foreach (var personagem in Model)
+            {
+               
+                    <strong>@personagem.Nome</strong>
+                    <br />
+                    <a href='@Url.Action("FichaTecnica", "StreetFighter",new { id = personagem.Id } )'>
+                    <img src="@personagem.Imagem" align="left" height="90" width="90" /></a>
+                    <br />
+                    @Html.ActionLink("Editar", "Editar", new { id = personagem.Id }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("Excluir", "Excluir", new { id = personagem.Id }, new { @class = "btn btn-default" })
 
-        @{
-            if (Model == null)
-            {
-                <h1>xxxxxx</h1>
+            <br />
+            <br />
+            <br />
+            <br />
             }
-            else
-            {
-                foreach (var personagem in Model)
-                {
-                <tr>
-                    <td><strong>@Html.ActionLink(personagem.Nome, "FichaTecnica", new { id = personagem.Id })</strong></td>
-                    
-                    <td><input type="button" value="Editar" onclick="location.href='@Url.Action("Editar", "StreetFighter", new { id = personagem.Id })'" /></td>
-                    <td><input type="button" value="Excluir" onclick="location.href='@Url.Action("Excluir", "StreetFighter", new { id = personagem.Id })'" /></td>
-                    <td><input type="button" value="Visualizar" onclick="location.href='@Url.Action("Visualizar", "StreetFighter", new { id = personagem.Id })'" /></td>
-                    <br />
-                    <br />
-                </tr>
-                    }
-                }
-            }
+        }
+    }

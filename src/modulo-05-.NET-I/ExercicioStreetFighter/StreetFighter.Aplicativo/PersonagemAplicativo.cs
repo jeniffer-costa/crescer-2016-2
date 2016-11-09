@@ -1,5 +1,6 @@
 ﻿using StreetFighter.Dominio;
 using StreetFighter.Repositorio;
+using StreetFighter.RepositorioFramework;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,6 +13,7 @@ namespace StreetFighter.Aplicativo
     public class PersonagemAplicativo
     {
         private readonly PersonagemRepositorio repositorio;
+        private readonly PersonagemRepositorioEF repositorioEF;
 
         public PersonagemAplicativo()
         {
@@ -49,12 +51,16 @@ namespace StreetFighter.Aplicativo
         {
             return repositorio.ListarPersonagens(filtro);
         }
-        
+
         public List<Personagem> ListarPersonagensSQL(string filtro = null)
         {
             return repositorio.ListarPersonagensSQL(filtro);
         }
 
+        public List<Personagem> ListarPersonagensEF(string filtroNome)
+        {
+            return repositorioEF.ListarPersonagensEF(filtroNome);
+        }
 
         public void Salvar(Personagem personagem)
         {

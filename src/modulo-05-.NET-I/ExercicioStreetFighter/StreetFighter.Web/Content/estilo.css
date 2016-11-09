@@ -1,8 +1,11 @@
 body{
     font-family: arial;
-    background-image: url(Images/StreetFighter2.png);
+    background-image: url(Images/chuli2.jpg);
     background-repeat: no-repeat;
     background-size: contain;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: 100%;
 }
 
 div.menu{
@@ -15,7 +18,8 @@ div.menu{
     margin: 250px auto 60px auto;
     padding: 20px;
     border: 1px solid white;
-    width:470px;height: 20px;
+    width: 490px;
+    height: 62px;
     background-color:rgba(140,140,140,0.6);
     box-sizing: border-box;
     
@@ -40,17 +44,19 @@ div.inicio{
     color: rgb(230,230,230);
     padding: 10px;
     text-align: lefth;
-    width: 600px;
+    width: 680px;
     background-color:rgb(70,70,70);
     margin: -10px -10px;
+    border-radius: 10px;
 }
 
 div.conteudo{
     padding: 10px;
-    width: 600px;
-    background-color:rgb(230,230,230);
+    width: 680px;
+    background-color:rgba(230,230,230,0.3);
     margin: -35px auto;
     overflow: auto;
+    border-radius: 10px;
 }
 
 

@@ -21,8 +21,16 @@ namespace StreetFighter.Web.Controllers
 
         public ActionResult ListaDePersonagens(string filtro)
         {
-            var model = new PersonagemAplicativo().ListarPersonagensSQL(filtro);
-            return View(model);
+            PersonagemAplicativo personagemAplicativo = new PersonagemAplicativo();
+            List<Personagem> personagens = personagemAplicativo.ListarPersonagensEF(filtro);
+
+            if (personagens.Count != 0)
+            {
+                return View(personagens);
+            }
+
+            ViewBag.ListaVazia = "Não há personagens cadastrados...";
+            return View();
         }
 
         public ActionResult Cadastrar(FichaTecnicaModel model)
@@ -36,7 +44,6 @@ namespace StreetFighter.Web.Controllers
 
             var model = new FichaTecnicaModel()
             {
-            Id = personagem.Id,
             Nome = personagem.Nome,
             DataNascimento = personagem.DataNascimento,
             Altura = personagem.Altura,
@@ -99,12 +106,20 @@ namespace StreetFighter.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                ViewBag.Mensagem = "Cadastro concluído com sucesso.";
                 PersonagemAplicativo personagemAplicativo = new PersonagemAplicativo();
-                Personagem personagem = new Personagem(model.Id,model.Nome, model.DataNascimento, 
-                                                       model.Altura, model.Peso, model.Origem, model.Imagem, 
-                                                       model.GolpesEspeciais,model.PersonagemOculto);
+
+                Personagem personagem = new Personagem(
+                                            model.Id == null ? 0 : (int)model.Id,
+                                            model.Nome, 
+                                            model.DataNascimento, 
+                                            model.Altura, 
+                                            model.Peso, 
+                                            model.Origem, 
+                                            model.Imagem, 
+                                            model.GolpesEspeciais,model.PersonagemOculto);
+
                 personagemAplicativo.SalvarSQL(personagem);
+
                 return View("FichaTecnica", model);
             }
             else
