@@ -34,5 +34,10 @@ namespace Loja.Dominio
         {
             return produtoRepositorio.BuscarPorId(id);
         }
+
+        public void Excluir(Produto produto)
+        {
+            produtoRepositorio.Excluir(produto);
+        }
     }
 }

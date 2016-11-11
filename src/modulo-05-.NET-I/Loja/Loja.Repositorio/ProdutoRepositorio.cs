@@ -38,6 +38,20 @@ namespace Loja.Repositorio
             }
         }
 
+        public void Excluir(Produto produto)
+        {
+            using (var context = new ContextoDeDados())
+            {
+                var produtoExluir = context.Produto.Where(p => p.Id == produto.Id).FirstOrDefault();
+                
+                if (produtoExluir != null)
+                {
+                    context.Produto.Remove(produtoExluir);
+                    context.SaveChanges();
+                }
+            }
+        }
+
         public List<Produto> Listar(string filtro)
         {
             using (var context = new ContextoDeDados())

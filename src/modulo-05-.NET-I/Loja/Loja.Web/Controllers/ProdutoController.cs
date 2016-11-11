@@ -62,5 +62,14 @@ namespace Loja.Web.Controllers
             };
             return View("Cadastro", model);
         }
+
+        public ActionResult Excluir(int id)
+        {
+            ProdutoServico produtoServico = ServicoDeDependencias.MontarProdutoServico();
+            var produto = produtoServico.Listar(null).Where(p => p.Id == id).ToList().ElementAt(0);
+            produtoServico.Excluir(produto);
+
+            return RedirectToAction("Produto");
+        }
     }
 }
