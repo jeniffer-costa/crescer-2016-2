@@ -55,5 +55,14 @@ namespace Loja.Repositorio
                 }
             }
         }
+
+        public Produto BuscarPorId(int id)
+        {
+            using (var context = new ContextoDeDados())
+            {
+                Produto produto = context.Produto.Find(id);
+                return produto;
+            }
+        }
     }
 }

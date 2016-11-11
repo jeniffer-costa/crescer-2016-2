@@ -20,9 +20,19 @@ namespace Loja.Dominio
             produtoRepositorio.Salvar(produto);
         }
 
+        public void Editar(Produto produto)
+        {
+            produtoRepositorio.Editar(produto);
+        }
+
         public List<Produto> Listar(string filtro)
         {
             return produtoRepositorio.Listar(filtro);
+        }
+
+        public Produto BuscarPorId(int id)
+        {
+            return produtoRepositorio.BuscarPorId(id);
         }
     }
 }

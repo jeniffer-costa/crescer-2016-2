@@ -3,10 +3,13 @@
 @{
     ViewBag.Title = "Produto";
 }
+<h3>@ViewBag.Mensagem</h3>
 <h2>Lista de Produtos </h2>
 <link href="~/Content/bootstrap.css" rel="stylesheet" />
 
-@Html.ActionLink("Cadastrar Novo Produto", "Cadastro", null, new { @class = "col-sm-4 btn btn-default", id = "Cadastrar" })
+@Html.ActionLink("Cadastrar Novo Produto", "Cadastro", null, new { @class = "col-sm-2 btn btn-success", id = "Cadastrar" })
+<br />
+<br />
 @{
     if (Model == null)
     {
@@ -14,11 +17,12 @@
     }
     else
     {
-        <h3>Produtos Cadastrados:</h3>
         foreach (var produto in Model)
         {
             <ul>
+                <br />
                 <li><strong>@produto.Nome</strong></li>
+                <li><strong>@produto.Valor</strong></li>
 
                 @Html.ActionLink("Editar", "Editar", new { id = produto.Id }, new { @class = "btn btn-default" })
                 @Html.ActionLink("Excluir", "Excluir", new { id = produto.Id }, new { @class = "btn btn-default" })

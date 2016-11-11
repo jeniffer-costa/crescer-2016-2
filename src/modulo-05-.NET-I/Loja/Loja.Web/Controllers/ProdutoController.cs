@@ -35,19 +35,32 @@ namespace Loja.Web.Controllers
                                         model.Valor);
             if (produto.Id == 0)
             {
-                produtoServico.Salvar(produto);
-                return RedirectToAction("Produto");
+                ViewBag.Mensagem = "Produto cadastrado com sucesso!";
             }
             else
             {
-                ViewBag.Mensagem = "Erro no cadastro!";
-                return View("Cadastro");
+                ViewBag.Mensagem = "Produto editado com sucesso!";
             }
+            produtoServico.Salvar(produto);
+            return RedirectToAction("Produto");
         }
 
         public ActionResult Cadastro(ProdutoModel model)
         {
             return View();
+        }
+
+        public ActionResult Editar(int id)
+        {
+            ProdutoServico produtoServico = ServicoDeDependencias.MontarProdutoServico();
+            var produto = produtoServico.BuscarPorId(id);
+            var model = new ProdutoModel()
+            {
+                Id = produto.Id,
+                Nome = produto.Nome,
+                Valor = produto.Valor
+            };
+            return View("Cadastro", model);
         }
     }
 }
