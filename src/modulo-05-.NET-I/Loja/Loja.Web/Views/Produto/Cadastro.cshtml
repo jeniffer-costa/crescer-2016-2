@@ -16,7 +16,7 @@
 <p>
 
 
-    @using (Html.BeginForm("Salvar", "ProdutoController", FormMethod.Post, new { @class = "form-horizontal" }))
+    @using (Html.BeginForm("Salvar", "Produto", FormMethod.Post, new { @class = "form-horizontal" }))
     {
                 <div class="form-group">
                     @Html.HiddenFor(model => model.Id, new { @class = "col-sm-2 control-label" })

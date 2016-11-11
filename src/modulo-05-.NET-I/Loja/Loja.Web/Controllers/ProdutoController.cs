@@ -36,7 +36,7 @@ namespace Loja.Web.Controllers
             if (produto.Id == 0)
             {
                 produtoServico.Salvar(produto);
-                return View("Produto");
+                return RedirectToAction("Produto");
             }
             else
             {
@@ -47,7 +47,7 @@ namespace Loja.Web.Controllers
 
         public ActionResult Cadastro(ProdutoModel model)
         {
-            return RedirectToAction("Cadastro", "Home");
+            return View();
         }
     }
 }

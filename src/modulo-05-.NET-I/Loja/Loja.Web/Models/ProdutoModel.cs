@@ -8,6 +8,10 @@ namespace Loja.Web.Models
 {
     public class ProdutoModel
     {
+        public ProdutoModel()
+        {
+
+        }
         private List<Produto> ListaProdutos { get; set; }
         public int Id { get; set; }
         public string Nome { get; set; }

@@ -17,10 +17,12 @@
         <h3>Produtos Cadastrados:</h3>
         foreach (var produto in Model)
         {
-            <strong>@produto.Nome</strong>
+            <ul>
+                <li><strong>@produto.Nome</strong></li>
 
                 @Html.ActionLink("Editar", "Editar", new { id = produto.Id }, new { @class = "btn btn-default" })
                 @Html.ActionLink("Excluir", "Excluir", new { id = produto.Id }, new { @class = "btn btn-default" })
+            </ul>
         }
     }
 }
