@@ -1,73 +1,60 @@
-// Java: public final class
-// C#: public sealed class
-public class Dwarf extends Personagem {
-    private final DataTerceiraEra dataNascimento;
-    public final static double ALTURA_MAXIMA = 1.32;
+import java.util.ArrayList;
 
-    // java type initializer
-    // vai ser replicado para cada construtor
+public class Dwarf extends Personagem
+{
+    protected DataTerceiraEra dataNascimento;
+
+    public Dwarf()
     {
-        vida = 110;
-        //status = Status.VIVO;
+        // this.dataNascimento = new DataTerceiraEra(1,1,1);
+        // this.status = Status.VIVO;
+        this(null,new DataTerceiraEra(1,1,1));
     }
 
-    public Dwarf() {
-        this(null, new DataTerceiraEra(1,1,1));
-    }
-
-    public Dwarf(String nome, DataTerceiraEra dataNascimento) {
-        super(nome);
+    public Dwarf(String nome, DataTerceiraEra dataNascimento)
+    {
+        super (nome);
         this.dataNascimento = dataNascimento;
+        this.quantVida = 110;
     }
 
-    public void perderVida() {
+    public void perdeVida(){
         boolean estaMorto = status.equals(Status.MORTO);
-        // sai do método
-        if (estaMorto) {
-            return;
-        }
-
-        double numero = this.getNumeroSorte();
-        if (numero < 0) {
-            this.experiencia += 2;
-        }
-        if (numero > 100) {
-            double vidaAposFlechada = this.vida - 10;
-            if (vidaAposFlechada == 0) {
+        if(!estaMorto){
+            double numeroSorte = getNumeroSorte();
+            if (numeroSorte < 0){
+                experiencia++;
+            }
+            if (numeroSorte > 100){
+                quantVida -= 10;
+                if (getQuantVida() < 0){
+                    quantVida = 0;
+                }
+            }
+            if ((int)this.getQuantVida() == 0){
                 status = Status.MORTO;
             }
-            if (vida > 0) {
-                vida = vidaAposFlechada;
-            }
         }
     }
 
-    public DataTerceiraEra getDataNascimento() {
-        return this.dataNascimento;
-    }
-
-    public double getNumeroSorte() {
-        double resultado = 101.;
+    public double getNumeroSorte(){
+        double valorInicial = 101.0;
         boolean ehBissexto = dataNascimento.ehBissexto();
-
-        if (ehBissexto && this.vida >= 80 && this.vida <= 90) {
-            resultado *= -33.0;
+        if (dataNascimento.ehBissexto() && this.getQuantVida() >= 80 && this.getQuantVida() <= 90){
+            valorInicial *= -33;
         }
-        //if (!dataNascimento.ehBissexto() && this.nome != null && (this.nome.equals("Seixas") || this.nome.equals("Meireles"))) {
-        if (!ehBissexto && ("Seixas".equals(this.nome) || "Meireles".equals(this.nome))) {
-            resultado = resultado * 33 % 100;
+        if (!dataNascimento.ehBissexto() && ("Seixas".equals(this.nome) || "Meireles".equals(this.nome))){
+            valorInicial = (valorInicial * 33) % 100;
         }
-
-        return resultado;
+        return valorInicial;
     }
     
-    public void tentarSorte() {
+    public void tentarSorte(){
         boolean temSorte = getNumeroSorte() == -3333;
-        if (temSorte) {
-            // aumenta 1000 unidades para todos itens do inventario
+
+        if(temSorte){
             inventario.aumentarUnidadesDosItens(1000);
         }
     }
     
-    public void inicializarInventario(int quantidadeFlechas) { }
 }

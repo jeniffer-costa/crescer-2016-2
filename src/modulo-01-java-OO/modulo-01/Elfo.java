@@ -1,28 +1,21 @@
-public class Elfo extends Personagem {
+public class Elfo extends Personagem{
 
-    private static int contadorDeElfos;
-    
-    public Elfo(String n) {
-        // Chamando construtor debaixo
-        this(n, 42);
+    private static int contador = 0;
+
+    public Elfo(String n){
+        // chamando construtor de baixo
+        this(n,42);
     }
 
-    public Elfo(String nome, int quantidadeFlechas) {
-        super(nome);
-        this.vida = 100;
-        this.inicializarInventario(quantidadeFlechas);
-        Elfo.contadorDeElfos++;
+    public Elfo(String n, int quantFlechas){
+        super(n);
+        inicializarInventario(quantFlechas);
+        quantVida = 100;
+        Elfo.contador++;
     }
-    
-    // ~Elfo() { }
-    // https://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#finalize()
-    protected void finalize() throws Throwable {
-        super.finalize();
-        Elfo.contadorDeElfos--;
-    }
-    
-    public static int getContadorDeElfos() {
-        return Elfo.contadorDeElfos;
+
+    public static int getContador(){
+        return Elfo.contador;
     }
 
     public Item getArco() {
@@ -33,23 +26,14 @@ public class Elfo extends Personagem {
         return this.inventario.getItens().get(1);
     }
 
-    public void atirarFlecha(Dwarf dwarf) {
-        atirarFlechas(dwarf, 1);
+    protected void finalize() throws Throwable{
+        super.finalize();
+        Elfo.contador--;
     }
 
-    protected void atirarFlechas(Dwarf dwarf, int fatorExperiencia) {
-        int quantidadeFlechas = getFlecha().getQuantidade();
-        boolean temFlecha = quantidadeFlechas > 0;
-        if (temFlecha) {
-            getFlecha().setQuantidade(quantidadeFlechas - 1);
-            experiencia += 1 * fatorExperiencia;
-            dwarf.perderVida();
-        }
-    }
-
-    protected void inicializarInventario(int quantidadeFlechas) {
-        this.inventario.adicionarItem(new Item("Arco", 1));
-        this.inventario.adicionarItem(new Item("Flechas", quantidadeFlechas >= 0 ? quantidadeFlechas : 42));
+    protected void inicializarInventario(int quantFlechas){
+        inventario.adicionarItem(new Item("Arco", 1));
+        inventario.adicionarItem(new Item("Flechas", quantFlechas >= 0 ? quantFlechas : 42));
     }
 
     public String toString() {
@@ -69,9 +53,13 @@ public class Elfo extends Personagem {
         );
     }
 
-    /*public void atirarFlechaRefactory() {
-    experiencia++;
-    flecha.setQuantidade(flecha.getQuantidade()-1);
-    }*/
-}
+    public void atirarFlecha(Dwarf dwarf){
+        boolean temFlecha = inventario.getItem(0).getQuantidade() > 0;
+        if (temFlecha){
+            inventario.getItem(1).setQuantidade(inventario.getItem(1).getQuantidade()-1);
+            experiencia++;
+            dwarf.perdeVida();
+        }
+    }
 
+}

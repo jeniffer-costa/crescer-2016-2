@@ -1,12 +1,12 @@
 public class CestoDeLembas
 {
-    private int numeroPaes;
-    
-    public CestoDeLembas(int numeroPaes) {
-        this.numeroPaes = numeroPaes;
+   private int numLembas;
+   
+    public CestoDeLembas(int numLembas)
+    {
+        this.numLembas = numLembas;
     }
-    
-    public boolean podeDividirEmPares() {
-        return numeroPaes > 2 && numeroPaes % 2 == 0 && numeroPaes <= 100;
+    public boolean podeDividirEmPares(){
+        return (numLembas > 2 && numLembas <=100 && numLembas % 2 == 0);
     }
 }

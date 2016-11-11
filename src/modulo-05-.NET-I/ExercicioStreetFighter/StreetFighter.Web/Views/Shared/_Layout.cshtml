@@ -1,0 +1,26 @@
+﻿
+@{
+    Layout = null;
+}
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link href="~/Content/estilo.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="menu">
+        <a href="~/StreetFighter/Index">Inicio</a>
+        <a href="~/StreetFighter/ListaDePersonagens">Lista De Personagens</a>
+        <a href="~/StreetFighter/SobreMim">Sobre Mim</a>
+    </div>
+
+    <div class="conteudo">
+        @RenderBody() 
+    </div>
+
+</body>
+
+</html>

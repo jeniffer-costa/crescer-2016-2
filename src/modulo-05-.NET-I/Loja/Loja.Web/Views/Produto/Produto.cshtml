@@ -1,0 +1,32 @@
+﻿@model List<Loja.Dominio.Produto>
+
+@{
+    ViewBag.Title = "Produto";
+}
+<h3>@ViewBag.Mensagem</h3>
+<h2>Lista de Produtos </h2>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+@Html.ActionLink("Cadastrar Novo Produto", "Cadastro", null, new { @class = "col-sm-2 btn btn-success", id = "Cadastrar" })
+<br />
+<br />
+@{
+    if (Model == null)
+    {
+        <h1>Nenhum Produto Cadastrado !</h1>
+    }
+    else
+    {
+        foreach (var produto in Model)
+        {
+            <ul>
+                <br />
+                <li><strong>@produto.Nome</strong></li>
+                <li><strong>@produto.Valor</strong></li>
+
+                @Html.ActionLink("Editar", "Editar", new { id = produto.Id }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Excluir", "Excluir", new { id = produto.Id }, new { @class = "btn btn-default" })
+            </ul>
+        }
+    }
+}

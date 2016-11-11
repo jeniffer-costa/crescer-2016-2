@@ -1,0 +1,53 @@
+body{
+    font-family: arial;
+    background-image: url(imagens/StreetFighter2.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+div.menu{
+    background-size: contain;
+    font-size: 17px;
+    color: white;
+    text-align: center;
+    word-spacing: 40px;
+    border-radius: 15px;
+    margin: 250px auto 60px auto;
+    padding: 20px;
+    border: 1px solid white;
+    width:450px;height: 20px;
+    background-color:rgba(140,140,140,0.6);
+}
+
+div.menu > a:link{
+    text-decoration:none;
+    color: white;
+    word-spacing: 1px;
+}
+
+div.menu a:visited{
+    color: white;
+    text-decoration:none;
+}
+
+div.menu a{
+    font-weight: bold;
+}
+
+div.inicio{
+    color: rgb(230,230,230);
+    padding: 10px;
+    text-align: lefth;
+    width: 600px;
+    background-color:rgb(70,70,70);
+    margin: 15px auto;
+}
+
+div.conteudo{
+    padding: 10px;
+    width: 600px;
+    background-color:rgb(230,230,230);
+    margin: -35px auto;
+}
+
+

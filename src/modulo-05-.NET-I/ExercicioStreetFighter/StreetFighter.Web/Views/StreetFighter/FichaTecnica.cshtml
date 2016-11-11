@@ -1,0 +1,35 @@
+﻿@using System.Globalization;
+
+@model StreetFighter.Web.Models.FichaTecnicaModel
+
+@{
+    ViewBag.Title = "FichaTecnica";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="inicio">
+    <h2>Ficha Técnica </h2>
+</div>
+    <h2><strong> @Model.Nome</strong></h2>
+    <p>
+        <img align="left" src="@Model.Imagem" />
+
+        @{
+            CultureInfo culture = new CultureInfo("pt-BR");
+            DateTimeFormatInfo dtfi = culture.DateTimeFormat;
+
+            int dia = Model.DataNascimento.Day;
+            int ano = Model.DataNascimento.Year;
+            string mes = culture.TextInfo.ToTitleCase(dtfi.GetMonthName(Model.DataNascimento.Month));
+            
+            string data = dia + " de " + mes + " de " + ano;
+
+        }
+
+        <strong>Nome:</strong> @Model.Nome<br>
+        <strong>Nascimento:</strong> @data<br>
+        <strong>Altura:</strong> @Model.Altura cm.<br>
+        <strong>Peso:</strong> @Model.Peso kg.<br>
+        <strong>Origem:</strong> @Model.Origem<br>
+        <strong>Personagem Oculto:</strong> @Model.PersonagemOculto<br>
+        <strong>Golpes Especiais Famosos:</strong> @Model.GolpesEspeciais<br>
+    </p>

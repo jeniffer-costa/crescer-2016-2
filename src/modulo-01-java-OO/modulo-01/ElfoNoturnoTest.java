@@ -3,87 +3,123 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ElfoNoturnoTest {
-
-    @After
-    // executa após cada cenário de testes.
-    public void tearDown() {
-        System.gc();
+public class ElfoNoturnoTest
+{
+        @After
+    public void tearDown(){
+      System.gc();
     }
     
     @Test
-    public void quandoatirarFlechaGanha3DeExperiencia() {
-        ElfoNoturno elfoNoturno = new ElfoNoturno("Night Legolas");
-        elfoNoturno.atirarFlecha(new Dwarf("Joe Doein", new DataTerceiraEra(1,1,1)));
-        assertEquals(3, elfoNoturno.getExperiencia());
+    public void elfoNoturnoNasceCom100deVida(){
+        ElfoNoturno novoElfo = new ElfoNoturno("Superman");
+        assertEquals(100,novoElfo.getQuantVida(),0.001);
     }
 
     @Test
-    public void quandoatirarDuasFlechasGanha6DeExperiencia() {
-        ElfoNoturno elfoNoturno = new ElfoNoturno("Night Legolas");
-        elfoNoturno.atirarFlecha(new Dwarf("Joe Doein", new DataTerceiraEra(1,1,1)));
-        elfoNoturno.atirarFlecha(new Dwarf("Joe Doein", new DataTerceiraEra(1,1,1)));
-        assertEquals(6, elfoNoturno.getExperiencia());
+    public void elfoNoturnoAtiraUmaFlechaEGanhaExperiencia(){
+        ElfoNoturno novoElfo = new ElfoNoturno("Superman");
+        novoElfo.atirarFlecha(new Dwarf());
+        assertEquals(3,novoElfo.getExperiencia());
     }
 
     @Test
-    public void quandoatirarTresFlechasGanha9DeExperiencia() {
-        ElfoNoturno elfoNoturno = new ElfoNoturno("Night Legolas");
-        elfoNoturno.atirarFlecha(new Dwarf("Joe Doein", new DataTerceiraEra(1,1,1)));
-        elfoNoturno.atirarFlecha(new Dwarf("Joe Doein", new DataTerceiraEra(1,1,1)));
-        elfoNoturno.atirarFlecha(new Dwarf("Joe Doein", new DataTerceiraEra(1,1,1)));
-        assertEquals(9, elfoNoturno.getExperiencia());
+    public void elfoNoturnoAtiraDuasFlechasEGanhaExperiencia(){
+        ElfoNoturno novoElfo = new ElfoNoturno("Superman");
+        novoElfo.atirarFlecha(new Dwarf());
+        novoElfo.atirarFlecha(new Dwarf());
+        assertEquals(6,novoElfo.getExperiencia());
     }
 
     @Test
-    public void quandoatirarFlechaPerde5DeVida() {
-        ElfoNoturno elfoNoturno = new ElfoNoturno("Night Legolas");
-        elfoNoturno.atirarFlecha(new Dwarf("Joe Doein", new DataTerceiraEra(1,1,1)));
-        assertEquals(95, elfoNoturno.getVida(), 0.); 
+    public void elfoNoturnoAtiraDezFlechasEGanhaExperiencia(){
+        ElfoNoturno novoElfo = new ElfoNoturno("Superman");
+        for(int i=0;i<10;i++){
+            novoElfo.atirarFlecha(new Dwarf());
+        }
+        assertEquals(30,novoElfo.getExperiencia());
     }
 
     @Test
-    public void quandoAtirarDuasFlechasPerde9ponto75DeVida() {
-        ElfoNoturno elfoNoturno = new ElfoNoturno("Night Legolas");
-        elfoNoturno.atirarFlecha(new Dwarf("Joe Doein", new DataTerceiraEra(1,1,1)));
-        elfoNoturno.atirarFlecha(new Dwarf("Joe Doein", new DataTerceiraEra(1,1,1)));
-        assertEquals(90.25, elfoNoturno.getVida(), 0.); 
+    public void elfoNoturnoNaoAtiraFlechaGetExperiencia(){
+        ElfoNoturno novoElfo = new ElfoNoturno("Superman");
+        assertEquals(0,novoElfo.getExperiencia());
     }
 
     @Test
+    public void elfoNoturnoAtiraUmaFlechaEPerdeVida(){
+        ElfoNoturno novoElfo = new ElfoNoturno("Superman");
+        novoElfo.atirarFlecha(new Dwarf());
+        assertEquals(95,novoElfo.getQuantVida(),0.001);
+    }
+
+    @Test
+    public void elfoNoturnoAtiraDuasFlechasEPerdeVida(){
+        ElfoNoturno novoElfo = new ElfoNoturno("Superman");
+        novoElfo.atirarFlecha(new Dwarf());
+        novoElfo.atirarFlecha(new Dwarf());
+        assertEquals(90.25,novoElfo.getQuantVida(),0.001);
+    }
+
+    @Test
+    public void elfoNoturnoXatiraDuasFlechasElfoNoturnoYaTiraCincoFlechasGetVida(){
+        ElfoNoturno novoElfoX = new ElfoNoturno("Superman");
+        ElfoNoturno novoElfoY = new ElfoNoturno("Superman");
+        novoElfoX.atirarFlecha(new Dwarf());
+        novoElfoX.atirarFlecha(new Dwarf());
+        novoElfoY.atirarFlecha(new Dwarf());
+        novoElfoY.atirarFlecha(new Dwarf());
+        novoElfoY.atirarFlecha(new Dwarf());
+        novoElfoY.atirarFlecha(new Dwarf());
+        novoElfoY.atirarFlecha(new Dwarf());
+        assertEquals(90.25,novoElfoX.getQuantVida(),0.001);
+        assertEquals(77.37809375,novoElfoY.getQuantVida(),0.001);
+    }
+
+    @Test
+    public void elfoNoturnoMorre(){
+        ElfoNoturno novoElfo = new ElfoNoturno("Superman");
+        for(int i=0;i<90;i++){
+           novoElfo.atirarFlecha(new Dwarf());
+        }
+        assertEquals(Status.MORTO,novoElfo.getStatus());
+    }
+    
+    @Test
+    public void elfoNoturnoAtira13FlechasGetStatus(){
+        ElfoNoturno novoElfo = new ElfoNoturno("Superman");
+        for(int i=0;i<12;i++){
+           novoElfo.atirarFlecha(new Dwarf());
+        }
+        assertEquals(Status.VIVO,novoElfo.getStatus());
+    }
+    
+        @Test
     public void quandoAtirarTresFlechasPerde14pontos() {
         ElfoNoturno elfoNoturno = new ElfoNoturno("Night Legolas");
         elfoNoturno.atirarFlecha(new Dwarf("Joe Doein", new DataTerceiraEra(1,1,1)));
         elfoNoturno.atirarFlecha(new Dwarf("Joe Doein", new DataTerceiraEra(1,1,1)));
         elfoNoturno.atirarFlecha(new Dwarf("Joe Doein", new DataTerceiraEra(1,1,1)));
-        assertEquals(85.7375, elfoNoturno.getVida(), 0.); 
+        assertEquals(85.7375, elfoNoturno.getQuantVida(), 0.); 
     }
 
     @Test
     public void quandoAtirarMuitasFlechasStatusMorto() {
-        ElfoNoturno elfoSuiçida = new ElfoNoturno("Night Legolas", 90);
+        ElfoNoturno elfoSuiçida = new ElfoNoturno("Night Legolas");
 
         for (int i = 0; i < 90; i++)
-            elfoSuiçida.atirarFlecha(new Dwarf("Joe Doein", new DataTerceiraEra(1,1,1)));
+                elfoSuiçida.atirarFlecha(new Dwarf("Joe Doein", new DataTerceiraEra(1,1,1)));
 
         assertEquals(Status.MORTO, elfoSuiçida.getStatus());
-    }
-
+    }   
+    
     @Test
-    public void elfoNoturnoNaoAtiraSeEstaMorto() {
-        ElfoNoturno elfoSuiçida = new ElfoNoturno("Harakiri", 91);
-        for (int i = 0; i < 91; i++)
-            elfoSuiçida.atirarFlecha(new Dwarf("Joe Doein", new DataTerceiraEra(1,1,1)));
+    public void elfoNoturnoSemFlechasPerdeVida() {
+        ElfoNoturno elfoSuiçida = new ElfoNoturno("Night Legolas");
 
-        assertEquals(270, elfoSuiçida.getExperiencia());
-    }
+        for (int i = 0; i < 90; i++)
+                elfoSuiçida.atirarFlecha(new Dwarf("Joe Doein", new DataTerceiraEra(1,1,1)));
 
-    @Test
-    public void elfoNoturnoSemFlechasNaoPerdeVida() {
-        ElfoNoturno elfoSuiçida = new ElfoNoturno("Harakiri", 1);
-        elfoSuiçida.atirarFlecha(new Dwarf("Joe Doein", new DataTerceiraEra(1,1,1)));
-        elfoSuiçida.atirarFlecha(new Dwarf("Joe Doein", new DataTerceiraEra(1,1,1)));
-        assertEquals(95, elfoSuiçida.getVida(), 0.);
-    }
+        assertEquals(Status.MORTO, elfoSuiçida.getStatus());
+    }   
 }
-

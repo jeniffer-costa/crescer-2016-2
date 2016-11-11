@@ -1,20 +1,25 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+public class ElfoVerde extends Elfo
+{
 
-public class ElfoVerde extends Elfo {
-
-    public ElfoVerde(String nome) {
+    public ElfoVerde(String nome){
         super(nome);
     }
 
-    public ElfoVerde(String nome, int quantidadeFlechas) {
+    public ElfoVerde(String nome, int quantidadeFlechas){
         super(nome, quantidadeFlechas);
     }
 
-    @Override
-    public void atirarFlecha(Dwarf dwarf) {
-        super.atirarFlechas(dwarf, 2);
+    public void atirarFlecha(Dwarf dwarf){
+        boolean temFlecha = inventario.getItem(0).getQuantidade() > 0;
+        if (temFlecha){
+            inventario.getItem(1).setQuantidade(inventario.getItem(1).getQuantidade()-1);
+            experiencia+=2;
+            dwarf.perdeVida();
+        }
     }
-
+    
     @Override
     protected void inicializarInventario(int quantidadeFlechas) {
         this.adicionarItem(new Item("Arco de Vidro", 1));
@@ -37,4 +42,6 @@ public class ElfoVerde extends Elfo {
             "Flecha de Vidro"
         };
     }
+
 }
+

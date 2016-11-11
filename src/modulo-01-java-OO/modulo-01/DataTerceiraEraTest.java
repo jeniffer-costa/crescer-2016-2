@@ -1,3 +1,5 @@
+
+
 import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
@@ -5,43 +7,22 @@ import org.junit.Test;
 
 public class DataTerceiraEraTest
 {
-    @Test
-    public void criarAno3019QueNaoEhBissexto() {
-        // Arrange
-        DataTerceiraEra data = new DataTerceiraEra(1, 10, 3019);
+  @Test
+  public void TestaAnoBissexto(){
+        //Arrange
+        DataTerceiraEra novaData = new DataTerceiraEra(3,11,2016);
         // Act
-        boolean obtido = data.ehBissexto();
+        novaData.ehBissexto();
         // Assert
-        assertFalse(obtido);
+        assertEquals(true,novaData.ehBissexto());
     }
-    
-    @Test
-    public void criarAno2000QueEhBissexto() {
-        // Arrange
-        DataTerceiraEra data = new DataTerceiraEra(1, 1, 2000);
+  @Test
+  public void TestaAnoNaoBissexto(){
+        //Arrange
+        DataTerceiraEra novaData = new DataTerceiraEra(22,5,2015);
         // Act
-        boolean obtido = data.ehBissexto();
+        novaData.ehBissexto();
         // Assert
-        assertTrue(obtido);
-    }
-    
-    @Test
-    public void criarAno1900NaoEhBissexto() {
-        assertFalse(new DataTerceiraEra(1,1,1900).ehBissexto());
-    }
-    
-    @Test
-    public void criarAno2012QueEhBissexto() {
-        assertTrue(new DataTerceiraEra(04, 05, 2012).ehBissexto());
-    }
-    
-    @Test
-    public void criarAno2200QueNaoEhBissexto() {
-        assertFalse(new DataTerceiraEra(04, 05, 2200).ehBissexto());
-    }
-    
-    @Test
-    public void criarAno2015QueNaoEhBissexto() {
-        assertFalse(new DataTerceiraEra(04, 05, 2015).ehBissexto());
+        assertEquals(false,novaData.ehBissexto());
     }
 }

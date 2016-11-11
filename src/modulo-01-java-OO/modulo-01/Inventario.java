@@ -1,52 +1,32 @@
 import java.util.ArrayList;
 
-public class Inventario {
-    private ArrayList<Item> itens;
+public class Inventario
+{
+    private ArrayList<Item> itens = new ArrayList<>();
 
-    public Inventario() {
-        itens = new ArrayList<>();
-    }
-
-    public ArrayList<Item> getItens() {
-        return itens;
-    }
-
-    public void adicionarItem(Item item) {
+    public void adicionarItem(Item item){
         itens.add(item);
     }
 
-    public void removerItem(Item item) {
+    public void removerItem(Item item){
         itens.remove(item);
     }
 
-    public String getDescricoesItens() {
-        //"Adaga,Escudo,Bracelete"
-        StringBuilder resultado = new StringBuilder("");
+    public ArrayList<Item> getItens(){
+        return itens;
+    }
 
-        /*for (int i = 0; i < itens.size(); i++) {
-        Item itemAtual = itens.get(i);
-        resultado += String.format("%s,", itemAtual.getDescricao());
-        }*/
+    public Item getItem(int index){
+        return itens.get(index);
+    }
 
-        /*int i = 0;
-        while (i < itens.size()) {
-        Item itemAtual = itens.get(i);
-        resultado += String.format("%s,", itemAtual.getDescricao());
-        i++;
-        }*/
-
-        /*int i = 0;
-        do {
-        Item itemAtual = itens.get(i);
-        resultado += String.format("%s,", itemAtual.getDescricao());
-        i++;
-        } while (i < itens.size());*/
+    public String getDescricoesItens(){
+        StringBuilder descricoesItens = new StringBuilder("");
 
         for (Item itemAtual : itens) {
-            resultado.append(String.format("%s,", itemAtual.getDescricao()));
+            descricoesItens.append(String.format("%s,", itemAtual.getDescricao()));
         }
-
-        return resultado.length() == 0 ? resultado.toString() : resultado.substring(0, resultado.length() - 1);
+        return descricoesItens.length() == 0 ? descricoesItens.toString() : descricoesItens.substring(0, descricoesItens.length() - 1);
     }
 
     public void aumentarUnidadesDosItens(int unidades) {
@@ -55,60 +35,70 @@ public class Inventario {
         }
     }
 
-    public void aumentarUnidadesProporcionalQuantidadePorItem() {
-        for (Item item : this.itens) {
-            item.aumentarProporcionalQuantidade();
-        }
-    }
+    public Item itemMaiorQuantidade(){
+        Item maiorQuantidade = itens.get(0);
 
-    public Item getItemComMaiorQuantidade() {
-        // maiorAteAgora = 0
-        // percorro todos os itens verificando se existe alguém maior que o até agora
-        // caso existir, atualiza a variável
-        // retorna no final
-        int indice = 0, maiorQtdAteAgora = 0;
-
-        for (int i = 0; i < itens.size(); i++) {
-            int qtdAtual = itens.get(i).getQuantidade();
-            if (qtdAtual > maiorQtdAteAgora) {
-                maiorQtdAteAgora = qtdAtual;
-                indice = i;
+        for(int i=0;i<itens.size();i++){
+            if(maiorQuantidade.getQuantidade() < itens.get(i).getQuantidade()){
+                maiorQuantidade = itens.get(i);
             }
         }
-
-        boolean temItens = !itens.isEmpty();
-        return temItens ? itens.get(indice) : null;
+        return maiorQuantidade;
     }
 
-    public void ordenarItens() {
-        ordenarItens(TipoOrdenacao.ASCENDENTE);
+    public void ordenarItensAscendentes(){     
+        for (int i = 0; i < itens.size(); i++) 
+        {
+            Item menorQuantidade = itens.get(i);
+            for (int j = i - 1; j >= 0 && itens.get(j).getQuantidade() > menorQuantidade.getQuantidade(); j--)
+            {
+                itens.set(j+1,itens.get(j));
+                itens.set(j,menorQuantidade);
+            }                       
+        }               
     }
 
-    public void ordenarItens(TipoOrdenacao tipoOrdenacao) {
-        // Versão mais estável do Bubblesort - Melhor caso O(n), Pior caso O(n^2)
-        // homenagem ao do-while: para forçar entrada na lógica
-        boolean posicoesSendoTrocadas;
-        boolean ascendente = tipoOrdenacao == TipoOrdenacao.ASCENDENTE;
-        do {
-            posicoesSendoTrocadas = false;
-            for (int j = 0; j < this.itens.size() - 1; j++) {
-                Item itemAtual = this.itens.get(j);
-                Item proximo = this.itens.get(j + 1);
+    public void tentarMuitaSorte(){
+        int somaValores;
+        int cont=0;
+        int quantidadeItemAtual;
+        int quantidade;
 
-                boolean precisaTrocar = 
-                    ascendente ? itemAtual.getQuantidade() > proximo.getQuantidade() : itemAtual.getQuantidade() < proximo.getQuantidade();
-
-                if (precisaTrocar) {
-                    this.itens.set(j, proximo);
-                    this.itens.set(j + 1, itemAtual);
-                    posicoesSendoTrocadas = true;
+        for(int i=0;i<itens.size();i++){
+             quantidadeItemAtual = itens.get(i).getQuantidade();
+             quantidade = itens.get(i).getQuantidade();
+            
+             if(quantidade < 0){
+                quantidade *= -1;
+                quantidadeItemAtual = quantidade;
                 }
+            while(cont != quantidade){
+                quantidadeItemAtual += cont;
+                cont++;
             }
-        } while (posicoesSendoTrocadas);
-
+            somaValores = (quantidadeItemAtual * 1000) + itens.get(i).getQuantidade() ;
+            itens.get(i).setQuantidade(somaValores);
+            cont=0;
+        }
+    }
+    public void ordenarItens(TipoOrdenacao ordenacao){
+      if(ordenacao == TipoOrdenacao.ASCENDENTE){
+          ordenarItensAscendentes();
+        }
+      if(ordenacao == TipoOrdenacao.DESCENDENTE){
+          ordenarItensDescendente();
+        }
+    }
+    
+    public void ordenarItensDescendente(){
+    for (int i = 0; i < itens.size(); i++) 
+        {
+            Item maiorQuantidade = itens.get(i);
+            for (int j = i - 1; j >= 0 && itens.get(j).getQuantidade() < maiorQuantidade.getQuantidade(); j--)
+            {
+                itens.set(j+1,itens.get(j));
+                itens.set(j,maiorQuantidade);
+            }                       
+        }        
     }
 }
-
-
-
-

@@ -3,60 +3,52 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ElfoVerdeTest {
-
-    @After
-    // executa após cada cenário de testes.
-    public void tearDown() {
-        System.gc();
+public class ElfoVerdeTest
+{
+        @After
+    public void tearDown(){
+      System.gc();
+    }
+    
+    @Test
+    public void elfoVerdeNasceCom100deVida(){
+        Elfo novoElfo = new Elfo("Superman");
+        assertEquals(100,novoElfo.getQuantVida(),0.001);
     }
 
     @Test
-    public void elfoVerdeAdicionaEspadaValiriana() {
-        ElfoVerde sortudo = new ElfoVerde("Sortudo");
-        Item espada = new Item("Espada de aço valiriano", 1);
-        sortudo.adicionarItem(espada);
-        assertEquals(3, sortudo.getInventario().getItens().size());
-        assertEquals(espada, sortudo.getInventario().getItens().get(2));
+    public void elfoVerdeAtiraUmaFlechaEGanhaExperiencia(){
+        ElfoVerde novoElfo = new ElfoVerde("Superman");
+        novoElfo.atirarFlecha(new Dwarf());
+        assertEquals(2,novoElfo.getExperiencia());
     }
 
     @Test
-    public void elfoVerdeAdicionaItemComDescricaoInvalida() {
-        ElfoVerde sortudo = new ElfoVerde("Mugless");
-        Item caneca = new Item("Caneca", 1);
-        sortudo.adicionarItem(caneca);
-        boolean adicionou = sortudo.getInventario().getItens().contains(caneca);
-        assertEquals(2, sortudo.getInventario().getItens().size());
-        assertFalse(adicionou);
+    public void elfoVerdeAtiraDuasFlechasEGanhaExperiencia(){
+        ElfoVerde novoElfo = new ElfoVerde("Superman",12);
+        novoElfo.atirarFlecha(new Dwarf());
+        novoElfo.atirarFlecha(new Dwarf());
+        assertEquals(4,novoElfo.getExperiencia());
     }
 
     @Test
-    public void elfoVerdeAdicionaFlechaVidroENulo() {
-        ElfoVerde sortudo = new ElfoVerde("Celeborn");
-        Item flechaDeVidro = new Item("Flecha de Vidro", 1);
-        sortudo.adicionarItem(flechaDeVidro);
-        sortudo.adicionarItem(null);
-        assertEquals(3, sortudo.getInventario().getItens().size());
-        assertEquals(flechaDeVidro, sortudo.getInventario().getItens().get(2));
+    public void elfoVerdeAtiraDezFlechasEGanhaExperiencia(){
+        ElfoVerde novoElfo = new ElfoVerde("Superman",12);
+        for(int i=0;i<10;i++){
+            novoElfo.atirarFlecha(new Dwarf());
+        }
+        assertEquals(20,novoElfo.getExperiencia());
     }
 
     @Test
-    public void elfoVerdeAdicionaArcoEFlechaVidroEDescricaoNula() {
-        ElfoVerde sortudo = new ElfoVerde("Celeborn");
-        Item arcoEFlecha = new Item("Arco de Vidro", 1);
-        Item descricaoNula = new Item(null, 1);
-        sortudo.adicionarItem(arcoEFlecha);
-        sortudo.adicionarItem(descricaoNula);
-        assertEquals(3, sortudo.getInventario().getItens().size());
-        assertEquals(arcoEFlecha, sortudo.getInventario().getItens().get(2));
+    public void elfoVerdeNaoAtiraFlechaGetExperiencia(){
+        ElfoVerde novoElfo = new ElfoVerde("Superman");
+        assertEquals(0,novoElfo.getExperiencia());
     }
 
     @Test
-    public void elfoVerdeGanhaExperienciaMesmoNaoTendoFlechas() {
-        ElfoVerde greenLegolas = new ElfoVerde("Green Legolas", 1);
-        greenLegolas.atirarFlecha(new Dwarf());
-        greenLegolas.atirarFlecha(new Dwarf());
-        assertEquals(2, greenLegolas.getExperiencia());
+    public void elfoVerdeGanhaExperienciaMesmoNaoTendoFlechas(){
+        ElfoVerde novoElfo = new ElfoVerde("Superman");
+        assertEquals(0,novoElfo.getExperiencia());
     }
-
 }
