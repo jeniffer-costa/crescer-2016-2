@@ -2,6 +2,7 @@ package br.com.cwi.crescer.exercicio02;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -26,6 +27,11 @@ public class MeuFileUtils {
                 System.out.println("Entre com o nome do arquivo que deseja excluir \n");
                 string = teclado.nextLine();
                 excluirArquivo(string);
+                break;
+            case "ls":
+                System.out.println("Entre com o nome do arquivo\\diretorio \n");
+                string = teclado.nextLine();
+                mostrarCaminhoAbsoluto(string);
                 break;
             default:
                 System.out.println("Comando inválido.");
@@ -64,16 +70,28 @@ public class MeuFileUtils {
                 System.out.println("Comando inválido.");
         }
     }
-    
-    public static void excluirArquivo(String arquivo){
+
+    public static void excluirArquivo(String arquivo) {
         final File file = new File(arquivo);
-        
-        if(file.exists() && !file.isDirectory()){
-        final boolean b = file.delete();
+
+        if (file.exists() && !file.isDirectory()) {
+            final boolean b = file.delete();
             System.out.println("Arquivo excluido com sucesso!");
+        } else {
+            System.out.println("Arquivo inválido");
         }
-        else{
-            System.out.println("Não pode ser excluido pois não é um arquivo!");
+    }
+
+    public static void mostrarCaminhoAbsoluto(String nome) {
+        File file = new File(nome);
+
+        if (file.exists()) {
+            if (!file.isDirectory()) {
+                System.out.println(file.getAbsolutePath());
+            } else {
+                File [] arquivos = file.listFiles();
+                System.out.println(Arrays.toString(arquivos));
+            }
         }
     }
 }
