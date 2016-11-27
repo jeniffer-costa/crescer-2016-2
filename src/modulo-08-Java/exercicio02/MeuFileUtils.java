@@ -33,6 +33,13 @@ public class MeuFileUtils {
                 string = teclado.nextLine();
                 mostrarCaminhoAbsoluto(string);
                 break;
+            case "mv":
+                System.out.println("Entre com o caminho de origem \n");
+                String stringOrigem = teclado.nextLine();
+                System.out.println("Entre com o caminho de destino \n");
+                String stringDestino = teclado.nextLine();
+                moverArquivo(stringOrigem,stringDestino);
+                break;
             default:
                 System.out.println("Comando inválido.");
         }
@@ -89,9 +96,23 @@ public class MeuFileUtils {
             if (!file.isDirectory()) {
                 System.out.println(file.getAbsolutePath());
             } else {
-                File [] arquivos = file.listFiles();
+                File[] arquivos = file.listFiles();
                 System.out.println(Arrays.toString(arquivos));
             }
         }
+    }
+
+    public static void moverArquivo(String origem, String destino) {
+        File fileOrigem = new File(origem);
+        File fileDestino = new File(destino);
+
+        if(fileDestino.isDirectory()){
+            System.out.println("Arquivo inválido!");
+        }
+        else{
+        if (fileOrigem.renameTo(new File(fileDestino + fileOrigem.getName()))) {
+            System.out.println("Arquivo movido com sucesso");
+        }
+      }
     }
 }
