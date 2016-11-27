@@ -22,6 +22,11 @@ public class MeuFileUtils {
                 String string = teclado.nextLine();
                 criarNovoArquivo(string);
                 break;
+            case "rm":
+                System.out.println("Entre com o nome do arquivo que deseja excluir \n");
+                string = teclado.nextLine();
+                excluirArquivo(string);
+                break;
             default:
                 System.out.println("Comando inválido.");
         }
@@ -55,8 +60,20 @@ public class MeuFileUtils {
                     System.out.println("Diretório criado com sucesso");
                 }
                 break;
-                default:
+            default:
                 System.out.println("Comando inválido.");
+        }
+    }
+    
+    public static void excluirArquivo(String arquivo){
+        final File file = new File(arquivo);
+        
+        if(file.exists() && !file.isDirectory()){
+        final boolean b = file.delete();
+            System.out.println("Arquivo excluido com sucesso!");
+        }
+        else{
+            System.out.println("Não pode ser excluido pois não é um arquivo!");
         }
     }
 }
