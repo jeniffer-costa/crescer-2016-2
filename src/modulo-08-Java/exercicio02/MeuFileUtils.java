@@ -12,13 +12,13 @@ public class MeuFileUtils {
 
     public static void main(String a[]) throws IOException {
         Scanner teclado = new Scanner(System.in);
-        
+
         System.out.println("Entre com a instrução \n");
         String opcao = teclado.nextLine();
 
         switch (opcao) {
-            case "mk": 
-                System.out.println("Entre com o nome e extensão do arquivo \n");
+            case "mk":
+                System.out.println("Entre com o nome do arquivo\\diretorio \n");
                 String string = teclado.nextLine();
                 criarNovoArquivo(string);
                 break;
@@ -28,14 +28,35 @@ public class MeuFileUtils {
     }
 
     public static void criarNovoArquivo(String nomeArquivo) throws IOException {
+        Scanner teclado = new Scanner(System.in);
+        String opcao;
         final File file = new File(nomeArquivo);
-       
-        if (file.exists()) {
-            System.out.println("O arquivo já existe.");
-        }
-        else{
-            file.createNewFile();
-            System.out.println("Criado com sucesso!");
+
+        System.out.println("Deseja criar arquivo ou diretório ? \n"
+                + "1- Arquivo \n"
+                + "2- Diretório \n");
+
+        opcao = teclado.nextLine();
+
+        switch (opcao) {
+            case "1":
+                if (file.exists()) {
+                    System.out.println("O arquivo já existe.");
+                } else {
+                    file.createNewFile();
+                    System.out.println("Arquivo criado com sucesso!");
+                }
+                break;
+            case "2":
+                if (file.exists()) {
+                    System.out.println("O diretorio já existe.");
+                } else {
+                    file.mkdirs();
+                    System.out.println("Diretório criado com sucesso");
+                }
+                break;
+                default:
+                System.out.println("Comando inválido.");
         }
     }
 }
