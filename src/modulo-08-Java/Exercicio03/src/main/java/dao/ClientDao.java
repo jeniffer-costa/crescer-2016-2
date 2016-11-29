@@ -18,7 +18,7 @@ public class ClientDao implements IDao<Client>{
 
     @Override
     public List list() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return entityManager.createQuery("Select c from Client c").getResultList();
     }
 
     /**

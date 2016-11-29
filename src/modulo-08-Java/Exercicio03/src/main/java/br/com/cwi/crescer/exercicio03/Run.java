@@ -19,14 +19,32 @@ public class Run {
         ClientDao clientDao = new ClientDao(em);
         
         final Client client = new Client();
-        client.setDsEmail("jenifferkosta@gmail.com");
-        client.setDsPassword("12345");
+        client.setDsEmail("spoder@gmail.com");
+        client.setDsPassword("98745");
         client.setDsPreferredCoin("Euro");
         client.setDsState("RS");
-        client.setDsUserName("jeniffer.costa");
-        client.setNmClient("Jeniffer");
+        client.setDsUserName("spoder.barbosa");
+        client.setNmClient("Spoder");
         client.setTpPermission("Admin");
-        clientDao.update(client);
+        clientDao.insert(client);
         
+        final Client client2 = new Client();
+        client2.setDsEmail("diego@gmail.com");
+        client2.setDsPassword("456");
+        client2.setDsPreferredCoin("Euro");
+        client2.setDsState("RS");
+        client2.setDsUserName("diego.barbosa");
+        client2.setNmClient("Diego");
+        client2.setTpPermission("Admin");
+        clientDao.insert(client2);
+        
+        //System.out.println(client.getDsEmail() + client.getDsPassword() + client.getNmClient());
+        
+        //clientDao.delete(client);
+        
+        System.out.println(clientDao.list());
+        
+        em.close();
+        emf.close();
     }
 }
