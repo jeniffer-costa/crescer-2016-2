@@ -19,14 +19,14 @@ public class Run {
         ClientDao clientDao = new ClientDao(em);
         
         final Client client = new Client();
-        client.setDsEmail("jenifferkosta@hotmail.com");
+        client.setDsEmail("jenifferkosta@gmail.com");
         client.setDsPassword("12345");
         client.setDsPreferredCoin("Euro");
         client.setDsState("RS");
         client.setDsUserName("jeniffer.costa");
         client.setNmClient("Jeniffer");
         client.setTpPermission("Admin");
-        clientDao.insert(client);
+        clientDao.update(client);
         
     }
 }

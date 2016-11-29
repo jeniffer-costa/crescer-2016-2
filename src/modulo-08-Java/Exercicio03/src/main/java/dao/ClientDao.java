@@ -38,7 +38,13 @@ public class ClientDao implements IDao<Client>{
 
     @Override
     public void update(Client t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            entityManager.getTransaction().begin();
+            entityManager.merge(t);
+            entityManager.getTransaction().commit();
+        }catch(Exception e){
+            entityManager.getTransaction().rollback();
+        }
     }
 
     @Override
