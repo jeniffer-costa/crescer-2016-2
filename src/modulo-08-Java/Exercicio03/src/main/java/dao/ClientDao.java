@@ -49,7 +49,13 @@ public class ClientDao implements IDao<Client>{
 
     @Override
     public void delete(Client t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            entityManager.getTransaction().begin();
+            entityManager.remove(t);
+            entityManager.getTransaction().commit();
+        }catch(Exception e){
+            entityManager.getTransaction().rollback();
+        }
     }
     
 }
