@@ -1,6 +1,6 @@
 package dao;
 
-import entity.Client;
+import entity.Contract;
 import java.util.List;
 import javax.persistence.EntityManager;
 
@@ -8,49 +8,50 @@ import javax.persistence.EntityManager;
  *
  * @author jeniffer.costa
  */
-public class ClientDao implements IDao<Client>{
-    
+public class ContractDao implements IDao<Contract> {
+
     final EntityManager entityManager;
-    
-    public ClientDao(EntityManager entityManager){
+
+    public ContractDao(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
     @Override
-    public List list() {
-        return entityManager.createQuery("Select c from Client c").getResultList();
-    }
-    @Override
-    public void insert(Client t) {
-        try{
+    public void insert(Contract c) {
+        try {
             entityManager.getTransaction().begin();
-            entityManager.persist(t);
+            entityManager.persist(c);
             entityManager.getTransaction().commit();
-        }catch(Exception e){
+        } catch (Exception e) {
             entityManager.getTransaction().rollback();
         }
     }
 
     @Override
-    public void update(Client t) {
-        try{
+    public void update(Contract c) {
+        try {
             entityManager.getTransaction().begin();
-            entityManager.merge(t);
+            entityManager.merge(c);
             entityManager.getTransaction().commit();
-        }catch(Exception e){
+        } catch (Exception e) {
             entityManager.getTransaction().rollback();
         }
     }
 
     @Override
-    public void delete(Client t) {
-        try{
+    public void delete(Contract c) {
+        try {
             entityManager.getTransaction().begin();
-            entityManager.remove(t);
+            entityManager.remove(c);
             entityManager.getTransaction().commit();
-        }catch(Exception e){
+        } catch (Exception e) {
             entityManager.getTransaction().rollback();
         }
     }
-    
+
+    @Override
+    public List<Contract> list() {
+        return entityManager.createQuery("Select p from Contract p").getResultList();
+    }
+
 }
