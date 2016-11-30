@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.SEQUENCE;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -41,9 +43,10 @@ public class Contract implements Serializable {
     @Column(name = "NM_CONTRACT")
     private String nmContract;
     
+   @JoinColumn(name = "CLIENT_ID_CLIENT")
     @Basic(optional = false)
-    @Column(name = "CLIENT_ID_CLIENT")
-    private Long clientIdClient;
+    @ManyToOne
+    private Client client;
 
     public Long getIdContract() {
         return idContract;
@@ -85,12 +88,12 @@ public class Contract implements Serializable {
         this.nmContract = nmContract;
     }
 
-    public Long getClientIdClient() {
-        return clientIdClient;
+    public Client getClient() {
+        return client;
     }
 
-    public void setClientIdClient(Long clientIdClient) {
-        this.clientIdClient = clientIdClient;
+    public void setClient(Client client) {
+        this.client = client;
     }
-
+    
 }
