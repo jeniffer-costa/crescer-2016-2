@@ -1,6 +1,7 @@
 
 package dao;
 
+import entity.CurrencyExchange;
 import java.util.List;
 import javax.persistence.EntityManager;
 
@@ -8,7 +9,7 @@ import javax.persistence.EntityManager;
  *
  * @author jeniffer.costa
  */
-public class CurrencyExchangeDao implements IDao<CurrencyExchangeDao>{
+public class CurrencyExchangeDao implements IDao<CurrencyExchange>{
 
     final EntityManager entityManager;
     
@@ -20,7 +21,7 @@ public class CurrencyExchangeDao implements IDao<CurrencyExchangeDao>{
         return entityManager.createQuery("Select c from Client c").getResultList();
     }
     @Override
-    public void insert(CurrencyExchangeDao t) {
+    public void insert(CurrencyExchange t) {
         try{
             entityManager.getTransaction().begin();
             entityManager.persist(t);
@@ -31,7 +32,7 @@ public class CurrencyExchangeDao implements IDao<CurrencyExchangeDao>{
     }
 
     @Override
-    public void update(CurrencyExchangeDao t) {
+    public void update(CurrencyExchange t) {
         try{
             entityManager.getTransaction().begin();
             entityManager.merge(t);
@@ -42,7 +43,7 @@ public class CurrencyExchangeDao implements IDao<CurrencyExchangeDao>{
     }
 
     @Override
-    public void delete(CurrencyExchangeDao t) {
+    public void delete(CurrencyExchange t) {
         try{
             entityManager.getTransaction().begin();
             entityManager.remove(t);
