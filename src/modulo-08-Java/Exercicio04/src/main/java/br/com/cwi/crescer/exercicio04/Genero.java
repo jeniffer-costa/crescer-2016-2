@@ -24,4 +24,26 @@ public class Genero implements Serializable{
     @Basic(optional = false)
     @Column(name = "ID_GENERO")
     private Long idGenero;
+    
+    @Basic(optional = false)
+    @Column(name = "DESCRICAO")
+    private Long descricao;
+
+    public Long getIdGenero() {
+        return idGenero;
+    }
+
+    public void setIdGenero(Long idGenero) {
+        this.idGenero = idGenero;
+    }
+
+    public Long getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(Long descricao) {
+        this.descricao = descricao;
+    }
+    
+    
 }
